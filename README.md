@@ -1,4 +1,4 @@
-# Device tree for Redmi K70E / POCO X6 Pro 5G (duchamp)
+# Device tree for Xiaomi 14T (degas)
 
 ```
 #
