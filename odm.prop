@@ -30,4 +30,4 @@ persist.vendor.tracking.dfs=true
 
 # SKUs
 ro.product.property_source_order=odm,vendor,product,system_ext,system
-import /odm/etc/duchamp_${ro.boot.hwc}.prop
+import /odm/etc/degas_${ro.boot.hwc}.prop

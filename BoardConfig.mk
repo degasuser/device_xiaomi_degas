@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/xiaomi/duchamp
+DEVICE_PATH := device/xiaomi/degas
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 
 # Architecture
@@ -13,7 +13,7 @@ TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_VARIANT := cortex-a55
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := duchamp
+TARGET_BOOTLOADER_BOARD_NAME := degas
 TARGET_NO_BOOTLOADER := true
 
 # Display
@@ -197,4 +197,4 @@ WIFI_FEATURE_SUPPLICANT_11AX := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit the proprietary files
-include vendor/xiaomi/duchamp/BoardConfigVendor.mk
+include vendor/xiaomi/degas/BoardConfigVendor.mk

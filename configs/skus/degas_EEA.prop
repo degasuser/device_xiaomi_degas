@@ -1,0 +1,5 @@
+ro.product.odm.model=2406APNFAG
+ro.product.odm.name=degas_eea
+ro.product.model_for_attestation=2406APNFAG
+ro.product.name_for_attestation=degas_eea
+ro.odm.build.fingerprint=Xiaomi/degas_eea/degas:16/BP2A.250605.031.A3/OS3.0.4.0.WNEEUXM:user/release-keys

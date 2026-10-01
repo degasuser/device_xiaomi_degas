@@ -1,4 +1,4 @@
-# Unpinned firmware from duchamp_global-user 16 BP2A.250605.031.A3 OS3.0.6.0.WNLMIXM release-keys
+# Unpinned firmware from degas_global-user 16 BP2A.250605.031.A3 OS3.0.4.0.WNEMIXM release-keys
 
 apusys.img;AB
 audio_dsp.img;AB
