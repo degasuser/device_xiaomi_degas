@@ -2,4 +2,4 @@ ro.product.odm.model=2406APNFAG
 ro.product.odm.name=degas_global
 ro.product.model_for_attestation=2406APNFAG
 ro.product.name_for_attestation=degas_global
-ro.odm.build.fingerprint=Xiaomi/degas_global/degas:16/BP2A.250605.031.A3/OS3.0.4.0.WNEMIXM:user/release-keys
+ro.odm.build.fingerprint=Xiaomi/degas_global/degas:16/BP2A.250605.031.A3/OS3.0.303.0.WNEMIXM:user/release-keys

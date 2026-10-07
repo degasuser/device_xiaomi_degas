@@ -1,4 +1,4 @@
-# Unpinned firmware from degas_global-user 16 BP2A.250605.031.A3 OS3.0.4.0.WNEMIXM release-keys
+# Unpinned firmware from missi-user 16 BP2A.250605.031.A3 OS3.0.303.0.WNERUXM release-keys
 
 apusys.img;AB
 audio_dsp.img;AB
