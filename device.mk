@@ -164,12 +164,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fstab.enableswap \
     fstab.mt6897 \
-    fstab.mt6897.vendor_ramdisk \
     init.cgroup.rc \
     init.connectivity.rc \
     init.fingerprint.rc \
     init.mt6897.rc \
-    init.mt6897.usb.rc \
     init.project.rc \
     init.sensor_2_0.rc \
     ueventd.mt6897.rc \
@@ -229,7 +227,7 @@ PRODUCT_PACKAGES += \
     DegasFrameworksOverlay \
     DegasPowerOffAlarmOverlay \
     DegasSettingsOverlay \
-    DegasSettingsProviderOverlay \
+    DegasSettingsProviderOverlayOverlay \
     DegasSystemUIOverlay \
     DegasWifiOverlay
 
@@ -369,7 +367,8 @@ PRODUCT_PACKAGES += \
 $(call soong_config_set_bool,android_hardware_mediatek_usb,audio_accessory_supported,true)
 
 # Vibrator
-$(call inherit-product, vendor/qcom/opensource/vibrator/vibrator-vendor-product.mk)
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator-service.mediatek
 
 # Wifi
 $(call soong_config_set_bool,mediatek_wifi_hal,use_pre_u_qpr2_struct,true)
