@@ -227,7 +227,7 @@ PRODUCT_PACKAGES += \
     DegasFrameworksOverlay \
     DegasPowerOffAlarmOverlay \
     DegasSettingsOverlay \
-    DegasSettingsProviderOverlayOverlay \
+    DegasSettingsProviderOverlay \
     DegasSystemUIOverlay \
     DegasWifiOverlay
 
