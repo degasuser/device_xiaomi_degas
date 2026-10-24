@@ -9,14 +9,12 @@ connsys_wifi.img;AB
 dpm.img;AB
 gpueb.img;AB
 gz.img;AB
-logo.img;AB
-lk.img;AB|690f3871a613545d40a78ce6f0e237252761bcde
+lk.img;AB|966e3a57f26e8357b70569cda77f3ad06018f787
 mcf_ota.img;AB
 mcupm.img;AB
 modem.img;AB
 mvpu_algo.img;AB
 pi_img.img;AB
-preloader_raw.img;AB|c8c0116c47cacaa7cb7cafa3fbff3ee30507e171
 scp.img;AB
 spmfw.img;AB
 sspm.img;AB

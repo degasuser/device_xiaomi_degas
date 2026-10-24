@@ -1,0 +1,16 @@
+{
+  "kernel_modules": 492,
+  "vendor_module_vermagic": {
+    "vermagic=6.1.138-android14-11-gdd83a2647cf4 SMP preempt mod_unload modversions aarch64": 434,
+    "vermagic=6.1.138-android14-11-g44bda9e8f6e9-ab13792638 SMP preempt mod_unload modversions aarch64": 58
+  },
+  "module_crc_comparisons": 3837,
+  "ramdisk_modules": 215,
+  "elf_dependencies_checked": 991,
+  "firmware_images": 20,
+  "errors": [],
+  "limitations": [
+    "Full Android/Soong compilation and device boot not performed.",
+    "CRC comparisons cover module-to-module symbols, not all GKI exports."
+  ]
+}
