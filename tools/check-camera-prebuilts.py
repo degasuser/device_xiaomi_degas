@@ -14,6 +14,8 @@ modules = {}
 for block in re.split(r'\n(?=\w+\s*\{)', blueprint):
     name = re.search(r'\bname:\s*"([^"]+)"', block)
     if name:
+        if name[1] in modules:
+            errors.append(f'Duplicate module definition: {name[1]}')
         modules[name[1]] = block
 
 sensor = re.compile(r'^(?:degas|duchamp).+_(?:IdxMgr|tuning)$')

@@ -39,7 +39,7 @@ The prebuilt audit completed with 492 kernel modules, 3,837 module symbol CRC
 comparisons, 1,001 native dependency declarations and 20 firmware hash checks,
 with no errors. The OTA firmware list excludes the old preloader and logo.
 
-Camera inventory follow-up: restored 28 stock sensor libraries and 22 tuning
+Camera inventory follow-up: restored 28 stock sensor libraries and 11 tuning
 database files, preserving the original duchamp and degas names required by
 the stock HAL. Verify module definitions, SONAME/DT_NEEDED and the four Xiaomi
 14T sensor data sets with:
