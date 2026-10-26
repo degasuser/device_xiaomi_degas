@@ -12,5 +12,7 @@
   "limitations": [
     "Full Android/Soong compilation and device boot not performed.",
     "CRC comparisons cover module-to-module symbols, not all GKI exports."
-  ]
+  ],
+  "graphics_common_elf_imports_checked": 14,
+  "graphics_common_expected_version": 7
 }

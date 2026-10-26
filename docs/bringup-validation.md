@@ -50,3 +50,17 @@ python3 device/xiaomi/degas/tools/check-camera-prebuilts.py vendor/xiaomi/degas
 
 The regression check rejects the previous Blueprint with undefined camera
 modules. The previous ELF audit alone did not check module existence.
+
+Graphics AIDL follow-up: stock PQ V7 imports graphics.common V4, conflicting
+with platform libui/libgralloctypes (V7). Include PQ V7 in the existing V4-to-V7
+ELF fixup group and regenerate its Blueprint. Only the dependency name changes
+in the blob; function code and file size are unchanged. The fresh-stock fixup
+is idempotent. The local checker validates 14 graphics.common ELF imports and
+Blueprint references and rejects the previous V4 Blueprint:
+
+```sh
+python3 device/xiaomi/degas/tools/check-graphics-common.py vendor/xiaomi/degas
+```
+
+The complete Soong graph still requires a remote build; these checks do not
+prove runtime ABI compatibility.
