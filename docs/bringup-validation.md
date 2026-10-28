@@ -64,3 +64,21 @@ python3 device/xiaomi/degas/tools/check-graphics-common.py vendor/xiaomi/degas
 
 The complete Soong graph still requires a remote build; these checks do not
 prove runtime ABI compatibility.
+
+Prebuilt kernel headers: this device does not build a kernel source tree.
+Use LineageOS `prebuilt_kernel_headers` for the local fingerprint/sensor
+consumers and for shared Xiaomi fingerprint and MediaTek PowerOffAlarm code.
+The shared hardware patches are stored in `build/patches/` and are applied
+only in the Android checkout used for this device build. Run from the source
+root before lunch/compilation (the Crave workflow does this automatically):
+
+```sh
+bash device/xiaomi/degas/tools/apply-build-patches.sh
+python3 device/xiaomi/degas/tools/check-kernel-headers.py .
+```
+
+The patch helper checks context and handles already-applied patches. The
+header check verifies the archive, five required headers and all four known
+consumers. Archive extraction and a host C syntax smoke test including the
+Xiaomi touch/display UAPI headers pass; a regression test rejects the old
+source-header dependency. A full Android build remains the final validation.

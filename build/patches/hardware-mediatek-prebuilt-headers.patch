@@ -1,0 +1,11 @@
+--- a/packages/PowerOffAlarm/Android.bp
++++ b/packages/PowerOffAlarm/Android.bp
+@@ -38,7 +38,7 @@
+     header_libs: [
+         "jni_headers",
+         "libbase_headers",
+-        "generated_kernel_headers",
++        "prebuilt_kernel_headers",
+     ],
+     shared_libs: [
+         "liblog",

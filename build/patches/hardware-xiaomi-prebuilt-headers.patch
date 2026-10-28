@@ -1,0 +1,10 @@
+--- a/fingerprint/Android.bp
++++ b/fingerprint/Android.bp
+@@ -59,6 +59,6 @@
+         "frameworks/native/services/surfaceflinger/CompositionEngine/include",
+     ],
+     header_libs: [
+-        "generated_kernel_headers",
++        "prebuilt_kernel_headers",
+     ],
+ }
