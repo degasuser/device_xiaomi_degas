@@ -28,6 +28,6 @@ cc_binary {
     ],
 
     header_libs: [
-        "generated_kernel_headers",
+        "prebuilt_kernel_headers",
     ],
 }

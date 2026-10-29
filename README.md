@@ -31,16 +31,32 @@ The Xiaomi 14T (codenamed *degas*) is a high-end smartphone from Xiaomi, announc
 Follow the official LineageOS build guide to set up your environment.
 
 ### Clone the device tree
+Use the `lineage-23.2` branch for the device, kernel and vendor repositories.
+Install `degas.xml` as the only degas manifest in `.repo/local_manifests/`
+and run `repo sync` to fetch the dependencies as well.
+
 ```bash
-git clone https://github.com/degasuser/device_xiaomi_degas.git device/xiaomi/degas
+git clone -b lineage-23.2 https://github.com/degasuser/device_xiaomi_degas.git device/xiaomi/degas
+mkdir -p .repo/local_manifests
+cp device/xiaomi/degas/degas.xml .repo/local_manifests/degas.xml
+repo sync
+git -C vendor/xiaomi/degas lfs install --local
+git -C vendor/xiaomi/degas lfs pull
 ```
 
 ### Extract proprietary blobs
-From a connected device running stock HyperOS or an extracted ROM dump:
+The extraction list targets HyperOS `OS3.0.303.0.WNERUXM`. Use a connected
+device running this version or a matching full ROM dump:
 ```bash
 cd device/xiaomi/degas
 ./extract-files.py <path_to_stock_dump>
 ```
+
+Extraction applies the ELF and APK fixups before generating `Android.bp` and
+`degas-vendor.mk`. After changing only the extraction list, regenerate them with
+`./setup-makefiles.py`. Regeneration alone does not apply blob fixups. Keep the
+generated files and their binaries together; editing `shared_libs` does not
+change a binary's `DT_NEEDED` dependencies.
 
 ### Build LineageOS
 ```bash

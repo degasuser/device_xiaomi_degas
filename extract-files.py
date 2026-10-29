@@ -97,7 +97,8 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/vendor.mediatek.hardware.camera.isphal-V1-ndk.so',
      'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V2-ndk.so',
      'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V4-ndk.so',
-     'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V6-ndk.so'): blob_fixup()
+     'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V6-ndk.so',
+     'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V7-ndk.so'): blob_fixup()
         .replace_needed('android.hardware.graphics.common-V4-ndk.so', 'android.hardware.graphics.common-V7-ndk.so'),
 
     'vendor/lib64/mt6897/libpqconfig.so': blob_fixup()
@@ -125,7 +126,7 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('lib_android_keymaster_keymint_utils.so', 'lib_android_keymaster_keymint_utils_V3.so'),
 
     'vendor/lib64/libkeymint_remote_prov_support_V3.so': blob_fixup()
-        .replace_needed('libbase.so', 'libbase-v34.so'),
+        .replace_needed('libbase.so', 'libbase-v33.so'),
 
     'odm/lib64/libmt_mitee.so': blob_fixup()
         .replace_needed('lib_android_keymaster_keymint_utils.so', 'lib_android_keymaster_keymint_utils_V3.so')
