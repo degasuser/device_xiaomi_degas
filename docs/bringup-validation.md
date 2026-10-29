@@ -82,3 +82,20 @@ header check verifies the archive, five required headers and all four known
 consumers. Archive extraction and a host C syntax smoke test including the
 Xiaomi touch/display UAPI headers pass; a regression test rejects the old
 source-header dependency. A full Android build remains the final validation.
+
+Device VINTF matrix: Crave build 307926 reached image packaging and failed
+check_vintf_all because the stock AIDL v1/default instances for
+`vendor.xiaomi.hardware.aidl.mtdservice.IMTService` and
+`vendor.xiaomi.hardware.mfidoca.IFidoService` were absent from framework
+matrices. Add exact optional framework declarations in
+`framework_compatibility_matrix.xml`, included by BoardConfig. No global
+VINTF/kernel checks are disabled. Validate against the packaged stock
+manifest fragments before the full Android check:
+
+```sh
+python3 device/xiaomi/degas/tools/check-vintf-vendor.py vendor/xiaomi/degas
+```
+
+This checks the two concrete HAL contracts, not the entire assembled VINTF
+graph. The former Xiaomi matrix fails the regression check; the device
+matrix matches both format/name/version/interface/instance combinations.

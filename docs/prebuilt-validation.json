@@ -17,5 +17,6 @@
   "graphics_common_expected_version": 7,
   "prebuilt_kernel_header_consumers_checked": 4,
   "required_kernel_headers_checked": 5,
-  "kernel_header_host_c_smoke_test": "passed"
+  "kernel_header_host_c_smoke_test": "passed",
+  "device_specific_aidl_vintf_instances_checked": 2
 }
