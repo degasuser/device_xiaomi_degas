@@ -314,7 +314,7 @@ vendor/lib64/libcom.xiaomi.metadatautils.so
 vendor/lib64/libcom.xiaomi.mizone.cpupolicy.so
 vendor/lib64/libcom.xiaomi.mizone.decoupleutil.so
 vendor/lib64/libcom.xiaomi.mizone.postprocinterface.so
-vendor/lib64/libcom.xiaomi.mizone.so
+vendor/lib64/libcom.xiaomi.mizone.so;DISABLE_CHECKELF
 vendor/lib64/libcom.xiaomi.pluginutils.so
 vendor/lib64/libdeflicker.so
 vendor/lib64/libfeature.hdr10.so

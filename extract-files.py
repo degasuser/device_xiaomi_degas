@@ -61,6 +61,9 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/libaaa_afassistctrl.so'): blob_fixup()
         .add_needed('libc++_shared.so'),
 
+    'vendor/lib64/libcameraopt.so': blob_fixup()
+        .add_needed('libprocessgroup_shim.so'),
+
     'vendor/lib64/mt6897/libmtkcam_hal_aidl_common.so': blob_fixup()
         .replace_needed('android.hardware.camera.common-V2-ndk.so', 'android.hardware.camera.common-V1-ndk.so'),
 

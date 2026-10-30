@@ -93,6 +93,9 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.full.prebuilt.xml \
     android.hardware.camera.raw.prebuilt.xml
 
+PRODUCT_PACKAGES += \
+    libprocessgroup_shim
+
 # Chipinfo
 PRODUCT_PACKAGES += \
     chipinfo
