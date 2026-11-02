@@ -76,6 +76,7 @@ blob_fixups: blob_fixups_user_type = {
      'odm/lib64/libalLDC.so',
      'odm/lib64/libalAILDC.so',
      'odm/lib64/libalhLDC.so',
+     'odm/lib64/libwa_widelens_undistort.so',
      'vendor/lib64/libMiPhotoFilter.so',
      'vendor/lib64/mt6897/libneuralnetworks_sl_driver_mtk_prebuilt.so'): blob_fixup()
         .clear_symbol_version('AHardwareBuffer_allocate')
