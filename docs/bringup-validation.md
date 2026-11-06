@@ -1,6 +1,6 @@
 # Degas prebuilt bringup validation
 
-Firmware base: HyperOS **OS3.0.303.0.WNERUXM** for Xiaomi 14T (`degas`).
+Firmware base: HyperOS **OS3.0.306.0.WNEEUXM** (EEA) for Xiaomi 14T (`degas`). Earlier notes below were written against OS3.0.303.0.WNERUXM.
 Use the device, vendor and prebuilt kernel changes together.
 
 The Soong failure for `libbase-v34` is fixed by changing the extraction fixup

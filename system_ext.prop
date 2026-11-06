@@ -21,6 +21,6 @@ media.stagefright.thumbnail.prefer_hw_codecs=true
 
 # Verison
 ro.mi.os.version.code=3
-ro.mi.os.version.incremental=3.0.303.0.WNERUXM
+ro.mi.os.version.incremental=3.0.306.0.WNEEUXM
 ro.miui.build.region=ru
 ro.product.marketname=Xiaomi 14T

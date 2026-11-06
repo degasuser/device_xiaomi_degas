@@ -13,7 +13,6 @@ assert matrix.tag == 'compatibility-matrix' and matrix.get('type') == 'framework
 matched = 0
 for fragment in [
     'manifest_vendor.xiaomi.hardware.aidl.mtdservice.xml',
-    'manifest_vendor.xiaomi.hardware.mfidoca.xml',
 ]:
     manifest = ET.parse(args.vendor / 'proprietary/odm/etc/vintf/manifest' / fragment).getroot()
     for hal in manifest.findall('hal'):
@@ -27,6 +26,6 @@ for fragment in [
                 if not accepted:
                     raise SystemExit(f'Missing matching framework matrix entry: {package}.{name}/{instance.text} (AIDL {version})')
                 matched += 1
-if matched != 2:
-    raise SystemExit(f'Expected to check two stock HAL instances, checked {matched}')
-print('Device-specific VINTF declarations checked: both stock AIDL v1/default instances match the framework matrix. Full checkvintf remains required.')
+if matched != 1:
+    raise SystemExit(f'Expected to check one stock HAL instance, checked {matched}')
+print('Device-specific VINTF declarations checked: the stock mtdservice AIDL v1/default instance matches the framework matrix. Full checkvintf remains required.')

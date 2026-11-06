@@ -1,4 +1,4 @@
-# Unpinned firmware from missi-user 16 BP2A.250605.031.A3 OS3.0.303.0.WNERUXM release-keys
+# Unpinned firmware from missi-user 16 BP2A.250605.031.A3 OS3.0.306.0.WNEEUXM release-keys
 
 apusys.img;AB
 audio_dsp.img;AB
@@ -9,7 +9,7 @@ connsys_wifi.img;AB
 dpm.img;AB
 gpueb.img;AB
 gz.img;AB
-lk.img;AB|966e3a57f26e8357b70569cda77f3ad06018f787
+lk.img;AB
 mcf_ota.img;AB
 mcupm.img;AB
 modem.img;AB

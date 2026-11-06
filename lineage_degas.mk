@@ -23,6 +23,6 @@ PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="missi-user 16 BP2A.250605.031.A3 OS3.0.303.0.WNERUXM release-keys" \
-    BuildFingerprint=Xiaomi/degas_ru/degas:16/BP2A.250605.031.A3/OS3.0.303.0.WNERUXM:user/release-keys \
-    DeviceProduct=degas_ru
+    BuildDesc="missi-user 16 BP2A.250605.031.A3 OS3.0.306.0.WNEEUXM release-keys" \
+    BuildFingerprint=Xiaomi/degas_eea/degas:16/BP2A.250605.031.A3/OS3.0.306.0.WNEEUXM:user/release-keys \
+    DeviceProduct=degas_eea

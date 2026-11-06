@@ -1,8 +1,8 @@
 {
   "kernel_modules": 492,
   "vendor_module_vermagic": {
-    "vermagic=6.1.138-android14-11-gdd83a2647cf4 SMP preempt mod_unload modversions aarch64": 434,
-    "vermagic=6.1.138-android14-11-g44bda9e8f6e9-ab13792638 SMP preempt mod_unload modversions aarch64": 58
+    "vermagic=6.1.157-android14-11-g817c5bb85e20 SMP preempt mod_unload modversions aarch64": 434,
+    "vermagic=6.1.157-android14-11-g78a0a76cd7b7-ab15497637 SMP preempt mod_unload modversions aarch64": 58
   },
   "module_crc_comparisons": 3837,
   "ramdisk_modules": 215,
@@ -11,7 +11,8 @@
   "errors": [],
   "limitations": [
     "Full Android/Soong compilation and device boot not performed.",
-    "CRC comparisons cover module-to-module symbols, not all GKI exports."
+    "CRC comparisons cover module-to-module symbols, not all GKI exports.",
+    "Module counts and vermagic refreshed for OS3.0.306.0.WNEEUXM; CRC comparisons were not re-run."
   ],
   "graphics_common_elf_imports_checked": 14,
   "graphics_common_expected_version": 7,

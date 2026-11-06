@@ -45,7 +45,7 @@ git -C vendor/xiaomi/degas lfs pull
 ```
 
 ### Extract proprietary blobs
-The extraction list targets HyperOS `OS3.0.303.0.WNERUXM`. Use a connected
+The extraction list targets HyperOS `OS3.0.306.0.WNEEUXM` (EEA). Use a connected
 device running this version or a matching full ROM dump:
 ```bash
 cd device/xiaomi/degas

@@ -131,6 +131,11 @@ blob_fixups: blob_fixups_user_type = {
 
     'vendor/lib64/libmicamera_hal_core.so': blob_fixup()
         .add_needed('libui_shim.so'),
+    ('odm/lib64/camera/plugins/com.xiaomi.plugin.gainmap.so',
+     'odm/lib64/camera/plugins/com.xiaomi.plugin.jpegrAggr.so'): blob_fixup()
+        .replace_needed('libultrahdr.so', 'libultrahdr-v34.so'),
+    'vendor/lib64/libmiface.so': blob_fixup()
+        .remove_needed('libdumpstateutil.so'),
 
     'vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee': blob_fixup()
         .replace_needed('lib_android_keymaster_keymint_utils.so', 'lib_android_keymaster_keymint_utils_V3.so')
