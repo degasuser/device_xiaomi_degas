@@ -41,3 +41,12 @@
 # Thermal
 /(vendor|system/vendor)/bin/mi_thermald                                                                u:object_r:vendor_mi_thermald_exec:s0
 /(vendor|system/vendor)/bin/degas-backlight-sync\.sh                                                   u:object_r:degas_backlight_sync_exec:s0
+
+# Touch (THP)
+/odm/bin/hw/vendor\.xiaomi\.hw\.touchfeature-service                                                   u:object_r:hal_touchfeature_xiaomi_default_exec:s0
+/odm/etc/init\.panel_info\.sh                                                                          u:object_r:vendor_touch_init_shell_exec:s0
+/dev/xiaomi-thp                                                                                        u:object_r:touchfeature_device:s0
+/dev/xiaomi-touch-knock                                                                                u:object_r:touchfeature_device:s0
+
+# Face
+/(vendor|odm)/bin/hw/mifaced                                                                             u:object_r:hal_face_default_exec:s0

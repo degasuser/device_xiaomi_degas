@@ -1,2 +1,6 @@
 hal_client_domain(system_app, hal_mlipay)
 hal_client_domain(system_app, vendor_hal_displayfeature)
+
+# XiaomiParts arms Touch_Fod_Enable through the touchfeature HAL.
+binder_call(system_app, hal_touchfeature_xiaomi_default)
+allow system_app vendor_hal_touchfeature_service:service_manager find;

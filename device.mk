@@ -96,6 +96,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libprocessgroup_shim
 
+PRODUCT_PACKAGES += \
+    libcamera2ndk_vendor
+
 # Chipinfo
 PRODUCT_PACKAGES += \
     chipinfo
@@ -295,7 +298,7 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Security patch level
-BOOT_SECURITY_PATCH := 2026-02-01
+BOOT_SECURITY_PATCH := 2026-08-01
 INIT_BOOT_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
 VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
 
@@ -308,6 +311,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
    sensors.dynamic_sensor_hal \
+   sensors.udfps.degas \
    sensors.xiaomi.v2
 
 PRODUCT_COPY_FILES += \
@@ -392,3 +396,9 @@ PRODUCT_PACKAGES += \
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/degas/degas-vendor.mk)
+
+# Input device configuration: the goodix touchscreen registers as a virtual
+# input device, so mark it internal to bind it to the built-in display.
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/idc/goodix_ts.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/goodix_ts.idc
+
