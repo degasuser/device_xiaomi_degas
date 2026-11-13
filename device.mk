@@ -170,6 +170,7 @@ PRODUCT_PACKAGES += \
     fstab.mt6897.vendor_ramdisk \
     init.cgroup.rc \
     init.connectivity.rc \
+    degas-backlight-sync \
     init.fingerprint.rc \
     init.mt6897.rc \
     init.mt6897.usb.rc \

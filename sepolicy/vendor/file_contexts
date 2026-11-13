@@ -40,3 +40,4 @@
 
 # Thermal
 /(vendor|system/vendor)/bin/mi_thermald                                                                u:object_r:vendor_mi_thermald_exec:s0
+/(vendor|system/vendor)/bin/degas-backlight-sync\.sh                                                   u:object_r:degas_backlight_sync_exec:s0
