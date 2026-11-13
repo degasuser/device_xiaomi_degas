@@ -3,3 +3,9 @@ set_prop(vendor_init, vendor_displayfeature_prop)
 set_prop(vendor_init, vendor_fingerprint_prop)
 
 rw_dir_file(vendor_init, sysfs_ged)
+
+# init.project.rc truncates the collision telemetry at post-fs-data and chowns
+# /dev/ufs-bsg0 for the boot control HAL.
+allow vendor_init persist_data_file:dir search;
+allow vendor_init persist_data_file:file { open write };
+allow vendor_init ufs_bsg_device:chr_file setattr;

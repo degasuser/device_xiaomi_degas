@@ -1,0 +1,27 @@
+Device tree for Xiaomi 14T (degas)
+Copyright (C) The LineageOS Project
+Licensed under the Apache License, Version 2.0.
+
+This tree started from the duchamp (Redmi K70E / POCO X6 Pro) device tree by
+mt6897-devs and has since been retargeted to degas against the stock HyperOS
+OS3.0.306.0.WNEEUXM firmware.
+
+Parts of it are taken or adapted from the degas device tree by Mikhail Mlhcnn
+(https://github.com/degas-developers/android_device_xiaomi_degas), licensed
+under the Apache License, Version 2.0:
+
+  init/degas-backlight-sync.sh
+  init/init.project.rc            (collisionData truncation, ufs-bsg0)
+  init/ueventd.xiaomi.rc          (cooling_device, ufs-bsg0)
+  udfps/                          (UdfpsHandler.cpp, mi_disp.h, xiaomi_touch.h)
+  sensors/UdfpsSensorSubHal.*
+  configs/idc/goodix_ts.idc
+  configs/media/                  (stock-derived codec/profile lists)
+  configs/thermal_info_config.json
+  overlay/DegasSystemUIOverlay, overlay/DegasSettingsOverlay,
+  overlay/DegasWifiOverlay (SAE), overlay-lineage/LineageApertureOverlayDegas
+  sepolicy/vendor/                (degas_backlight_sync, hal_face_default,
+                                   hal_touchfeature_xiaomi, genfs nodes and
+                                   the rules noted in the respective files)
+
+These files were modified where needed to fit this tree.

@@ -55,3 +55,20 @@ genfscon sysfs /devices/platform/soc/1e000000.adspsys/wakeup                    
 genfscon sysfs /devices/platform/soc/1f800000.mmlsys-config/wakeup                                                      u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/virtual/power_supply/mtk-gauge/wakeup                                                           u:object_r:sysfs_wakeup:s0
 genfscon proc /tp_fw_version                                                                           u:object_r:proc_touch:s0
+
+# degas hardware nodes (charger topology, keys, smart PA, DisplayPort)
+genfscon sysfs /kernel/smartpa                                                                           u:object_r:sysfs_chip_vendor:s0
+genfscon sysfs /devices/platform/11cc2000.i2c/i2c-12/12-006c/power_supply                                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/charger_gl/power_supply                                                 u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/11cc3000.i2c/i2c-13/13-006a/power_supply                                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/soc/11e10000.dp-tx/extcon                                               u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/11cc2000.i2c/i2c-12/12-006c/power_supply/cp_master/wakeup                              u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/charger_gl/power_supply/mtk-master-charger/wakeup                                        u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/charger_gl/power_supply/mtk-mst-div-chg/wakeup                                           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/charger_gl/power_supply/mtk-mst-hvdiv-chg/wakeup                                         u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/charger_gl/power_supply/mtk-slv-div-chg/wakeup                                           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/charger_gl/power_supply/mtk-slv-hvdiv-chg/wakeup                                         u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/charger_gl/power_supply/usb/wakeup                                                       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11cc3000.i2c/i2c-13/13-006a/power_supply/cp_slave/wakeup                u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11b71000.i2c/i2c-4/4-0010/wakeup                                        u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/gpio_keys/wakeup                                                        u:object_r:sysfs_wakeup:s0
