@@ -3163,15 +3163,6 @@ vendor/lib64/libecoengine.so
 vendor/lib64/librendercore.so
 vendor/lib64/vendor.xiaomi.hw.touchfeature-V1-ndk.so
 vendor/data/model/AIHDR.dla
-vendor/data/model/SR270*480.dla
-vendor/data/model/SR288*640.dla
-vendor/data/model/SR360*640.dla
-vendor/data/model/SR376*896.dla
-vendor/data/model/SR480*864.dla
-vendor/data/model/SR486*864.dla
-vendor/data/model/SR504*896.dla
-vendor/data/model/SR540*960.dla
-vendor/data/model/SR720*1280.dla
 vendor/data/model/mimemc_2x_1088p_pre.dla
 vendor/data/model/mimemc_2x_1088p_pro.dla
 vendor/data/model/mimemc_2x_1088p_q0.dla
