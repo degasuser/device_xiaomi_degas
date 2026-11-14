@@ -3124,7 +3124,8 @@ odm/lib64/libmialgo_ellc.so
 odm/lib64/libminikin.xiaomi.so
 odm/lib64/libmiphone_preview_mdbokeh.so
 odm/lib64/libmiphone_tsspot.so
-odm/lib64/libmiremosaic.so
+odm/lib64/libmiremosaic.so;DISABLE_CHECKELF
+odm/lib64/libremosaic_wrapper.so;MODULE_SUFFIX=-odm
 odm/lib64/libportrait_repair_apu.so
 odm/lib64/libremosaiclib.so
 odm/lib64/libtensorflowlite_touch_c.so
