@@ -1860,8 +1860,6 @@ vendor/lib64/libsn220u_fw.so;DISABLE_CHECKELF
 vendor/lib64/sensors.touch.detect.so
 odm/etc/sensors/lightSensorConfig_Stk_Csot.json
 odm/etc/sensors/lightSensorConfig_Stk_Tianma.json
-vendor/bin/wlan_assistant
-vendor/etc/init/wlan_assistant.rc
 vendor/firmware/gt9895_cfg_6897v01.bin
 vendor/firmware/gt9895_firmware_6897v01.bin
 odm/etc/camera/102_SummerDay.png
