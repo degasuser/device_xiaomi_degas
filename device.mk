@@ -147,8 +147,7 @@ $(call soong_config_set,XIAOMI_BIOMETRICS_FINGERPRINT,IMPL_VER,V2)
 
 # GNSS
 PRODUCT_PACKAGES += \
-    android.hardware.location.gps.prebuilt.xml \
-    libmnl.vendor
+    android.hardware.location.gps.prebuilt.xml
 
 # Health
 PRODUCT_PACKAGES += \

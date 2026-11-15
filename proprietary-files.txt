@@ -1243,6 +1243,7 @@ vendor/etc/vintf/manifest/android.hardware.gatekeeper-service.mitee.xml
 # GNSS
 vendor/bin/hw/android.hardware.gnss-service.mediatek
 vendor/bin/mnld
+vendor/lib64/mt6897/libmnl.so:vendor/lib64/libmnl_mtk.so;FIX_SONAME
 vendor/bin/mtk_agpsd
 vendor/bin/mtk_lbs_service
 vendor/etc/MNL_Config.xml
@@ -1314,6 +1315,7 @@ vendor/etc/vintf/manifest/android.hardware.security.secureclock-service.mitee.xm
 vendor/etc/vintf/manifest/android.hardware.security.sharedsecret-service.mitee.xml
 vendor/lib64/libkeymint.so:vendor/lib64/libkeymint_V3.so;FIX_SONAME
 vendor/lib64/libkeymint_remote_prov_support.so:vendor/lib64/libkeymint_remote_prov_support_V3.so;FIX_SONAME
+vendor/lib64/libcppcose_rkp.so:vendor/lib64/libcppcose_rkp_V3.so;FIX_SONAME
 
 # Media
 system/lib64/libstagefright_bufferqueue_helper.so:vendor/lib64/libstagefright_bufferqueue_helper-v36.so;FIX_SONAME
@@ -1606,7 +1608,7 @@ system_ext/lib64/libimsma_socketwrapper.so
 system_ext/lib64/libmtk_vt_service.so
 system_ext/lib64/libmtk_vt_wrapper.so
 system_ext/lib64/libsignal.so
-system_ext/lib64/libsink.so:system_ext/lib64/libsink-mtk.so;FIX_SONAME
+system_ext/lib64/libsink.so:system_ext/lib64/libsink-mtk.so;FIX_SONAME;DISABLE_CHECKELF
 system_ext/lib64/libsource.so
 system_ext/lib64/libvcodec_cap.so
 system_ext/lib64/libvcodec_capenc.so
