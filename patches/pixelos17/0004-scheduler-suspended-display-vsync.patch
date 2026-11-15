@@ -1,0 +1,34 @@
+--- a/services/surfaceflinger/Scheduler/Scheduler.cpp
++++ b/services/surfaceflinger/Scheduler/Scheduler.cpp
+@@ -837,6 +837,14 @@
+         return;
+     }
+     const Display& display = *displayOpt;
++
++    // OFF and suspended AOD emit no hardware VSYNC. Direct resync callers
++    // must not re-enable sampling and wait for a period confirmation that
++    // cannot arrive until the display resumes.
++    if (display.powerMode == hal::PowerMode::OFF ||
++        display.powerMode == hal::PowerMode::DOZE_SUSPEND) {
++        return;
++    }
+ 
+     if (display.schedulePtr->isHardwareVsyncAllowed(allowToEnable)) {
+         if (!modePtr) {
+--- a/services/surfaceflinger/SurfaceFlinger.cpp
++++ b/services/surfaceflinger/SurfaceFlinger.cpp
+@@ -1705,10 +1705,10 @@
+             }
+             auto& desiredMode = desiredModeIt->second;
+ 
+-            // MediaTek must not receive a modeset while its panel is OFF.
+-            // Keep the request in the map so the existing bundle cleanup drops
+-            // all requests sharing this synchronization token. DOZE is powered on.
+-            if (!display->isPoweredOn()) {
++            // MediaTek must not receive a modeset while its panel is OFF or
++            // in DOZE_SUSPEND. Keep the request in the map so bundle cleanup
++            // drops all requests sharing this synchronization token.
++            if (!display->isRefreshable()) {
+                 shouldDropModeRequests = true;
+                 canApplyAllModes = false;
+                 continue;

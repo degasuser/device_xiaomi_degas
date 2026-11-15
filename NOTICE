@@ -181,3 +181,20 @@ See sections 7 and 8 of the LICENSE file: the software is
 provided "AS IS", without warranty of any kind, and no contributor is liable
 for any damages arising from its use — including, without limitation, damage
 to a device it is installed on.
+
+PixelOS 17 adaptation (2026-11-13): product configuration, EEA stock
+provenance/hashes, partition geometry and matched prebuilt module layout,
+audio module disambiguation, explicit touchfeature VINTF, extraction checks,
+camera database names, and patches rebased for Android 17. The original
+LineageOS patches are preserved under patches/lineage23-reference.
+PixelOS updates (2026-11-14 to 2026-11-15): boot/audio and Wi-Fi compatibility,
+explicit IMS receiver registration, camera database links, guarded Codec2
+allocation/backend fixes and Power/AOD changes. A full Android 17 build completed on
+2026-11-13; later targeted changes were tested as described in README.md.
+MiCam integration is maintained separately and is not included in this public branch.
+
+The original Xiaomi 14T / degas tree was created by Mikhail Mlhcnn
+(Advnirr, https://github.com/Advnirr) and published by Degas Developers:
+https://github.com/degas-developers/android_device_xiaomi_degas.
+The PixelOS adaptation is published separately by mt6897-degas:
+https://github.com/mt6897-degas/android_device_xiaomi_degas/tree/pixelos-17.

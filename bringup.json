@@ -1,0 +1,14 @@
+{
+  "stock": "OS3.0.306.0.WNEEUXM",
+  "source_repository": "https://github.com/degas-developers/android_device_xiaomi_degas",
+  "source_commit": "e7de73fe295ff07eb08927c9c8c61b536a2cd378",
+  "pixelos_manifest_commit": "29f6010bcd2bd4742502ea7ccee763c64f02a3c1",
+  "super_size": 9663676416,
+  "boot_spl": "2026-08-01",
+  "init_boot_spl": "2026-08-01",
+  "vendor_spl": "2026-08-01",
+  "platform_stock_spl": "2026-09-01",
+  "vendor_api": 34,
+  "fcm": 8,
+  "ims_stock_dex_sha1": "46b15a0842b66bf4b584095a58d13ad217152559"
+}

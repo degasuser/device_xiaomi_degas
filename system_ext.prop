@@ -29,8 +29,8 @@ log.tag.libcomposer_ext=W
 # Media
 media.stagefright.thumbnail.prefer_hw_codecs=true
 
-# Verison
+# Stock vendor compatibility version
 ro.mi.os.version.code=3
-ro.mi.os.version.incremental=OS3.0.4.0.WNEMIXM
+ro.mi.os.version.incremental=OS3.0.306.0.WNEEUXM
 ro.miui.build.region=global
 ro.product.marketname=Xiaomi 14T

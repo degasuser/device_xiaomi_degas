@@ -4,9 +4,9 @@
 //
 
 cc_binary {
-    name: "android.hardware.audio.service.mediatek",
-
-    init_rc: ["android.hardware.audio.service.mediatek.rc"],
+    name: "android.hardware.audio.service.degas",
+    overrides: ["android.hardware.audio.service.mediatek"],
+    init_rc: ["android.hardware.audio.service.degas.rc"],
     relative_install_path: "hw",
     vendor: true,
 
@@ -27,7 +27,7 @@ cc_binary {
         "libutils",
         "libhardware",
         "android.hardware.soundtrigger3-impl",
-        "android.hardware.soundtrigger3-V3-ndk",
+        "android.hardware.soundtrigger3-V1-ndk",
         "vendor.mediatek.hardware.audio-impl",
         "vendor.mediatek.hardware.audio-V1-ndk",
     ],

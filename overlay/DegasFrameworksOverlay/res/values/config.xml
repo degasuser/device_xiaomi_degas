@@ -67,7 +67,7 @@
     <!-- Float counterpart of config_screenBrightnessDoze - DisplayPowerController
          reads THIS one, the integer above is only a legacy fallback.
          0 makes the settled AOD brighter - the luminance then comes purely from
-         the DDIC's own AOD mode (mi_display doze_brightness, HBM 60nit) and no
+         the DDIC's own AOD mode (mi_display doze_brightness) and no
          backlight value is written on top of it. But 0 costs two real bugs, so
          it is deliberately non-zero for now:
 
@@ -637,7 +637,7 @@
     <bool name="config_dozeAlwaysOnEnabled">false</bool>
 
     <!-- If AOD can show an ambient version of the wallpaper -->
-    <bool name="config_dozeSupportsAodWallpaper">true</bool>
+    <bool name="config_dozeSupportsAodWallpaper">false</bool>
 
     <!-- Power Management: Specifies whether to decouple the auto-suspend state of the
          device from the display on/off state.
@@ -751,11 +751,9 @@
          non-zero. -->
     <integer name="config_defaultPeakRefreshRate">144</integer>
 
-    <!-- Hold 120 Hz for as long as the UDFPS overlay is up (patches/frameworks_base/0003).
-         Local HBM reprograms the panel to 120 Hz, and any display mode change while it is lit
-         shows as a full-screen brightness flash; stock does the same through
-         ro.vendor.display.fod_monitor_default_fps=120, from ENROLL_START/AUTH_START to the
-         matching stop. -->
+    <!-- Optical LHBM requires 120 Hz. Patch 0005 holds the vote while interactive,
+         but releases it in idle AOD. A scan waits for the actual 120 Hz display mode
+         before onPointerDown, then delays vote release until LHBM has been turned off. -->
     <integer name="config_udfpsRefreshRate">120</integer>
 
     <!-- Whether the device supports double tap to wake. The touch controller decodes the

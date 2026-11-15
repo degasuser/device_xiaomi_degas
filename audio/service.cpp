@@ -48,7 +48,6 @@ template <class Iter>
 static bool registerMandatoryPassthroughServiceImplementations(Iter first, Iter last) {
     bool ret = false;
     for (; first != last; ++first) {
-        const std::string& interfaceName = *first;
         ret |= (registerPassthroughServiceImplementation(*first) == OK);
     }
     return ret;

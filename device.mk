@@ -3,6 +3,8 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+LOCAL_PATH := device/xiaomi/degas
+
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
@@ -45,7 +47,7 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio.service.mediatek \
+    android.hardware.audio.service.degas \
     android.hardware.audio.effect@7.0-impl \
     android.hardware.bluetooth.audio-impl
 
@@ -58,6 +60,13 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     MtkInCallService
+
+PRODUCT_PACKAGES += \
+    libaudiotrack_degas_shim
+
+# The stock KeyMint V3 helpers require fmt v7 from VNDK 34.
+PRODUCT_PACKAGES += \
+    libbase-degas-v34
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
@@ -240,9 +249,6 @@ PRODUCT_PACKAGES += \
     DegasWifiOverlay
 
 PRODUCT_PACKAGES += \
-    LineageApertureOverlayDegas
-
-PRODUCT_PACKAGES += \
     NcmTetheringOverlay
 
 # Partitions
@@ -269,7 +275,14 @@ include hardware/mediatek/configs/properties/vendor_logtag.mk
 ENABLE_VENDOR_RIL_SERVICE := true
 
 $(call inherit-product, hardware/lineage/compat/frameworks/compat.mk)
-$(call inherit-product, hardware/mediatek/frameworks/mediatek-frameworks.mk)
+
+# The common MTK product also adds telephony/telecom jars to system_ext.
+# This device uses the stock jars in system below; add each boot jar once.
+PRODUCT_PACKAGES += \
+    mediatek-common
+
+PRODUCT_BOOT_JARS += \
+    system_ext:mediatek-common
 
 PRODUCT_PACKAGES += \
     mdota_symlink
@@ -299,9 +312,10 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Security patch level
-BOOT_SECURITY_PATCH := 2026-02-01
+# Retain the stock boot/vendor patch level, independently of the Android 17 platform SPL.
+BOOT_SECURITY_PATCH := 2026-08-01
 INIT_BOOT_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
-VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
+VENDOR_SECURITY_PATCH := 2026-08-01
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -334,6 +348,8 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/google/interfaces \
     hardware/google/pixel \
+    hardware/google/pixel/pixelstats \
+    hardware/google/pixel/power-libperfmgr \
     hardware/lineage/interfaces/power-libperfmgr \
     hardware/mediatek \
     hardware/mediatek/libmtkperf_client \

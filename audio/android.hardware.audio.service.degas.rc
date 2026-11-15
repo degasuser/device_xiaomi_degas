@@ -2,7 +2,7 @@ on post-fs-data
     mkdir /data/vendor/audiohal 0771 system audio
     mkdir /data/vendor/audio 0771 system audio
 
-service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service.mediatek
+service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service.degas
     class hal
     user audioserver
     # media gid needed for /dev/fm (radio) and for /data/misc/media (tee)
