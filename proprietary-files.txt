@@ -309,6 +309,7 @@ odm/lib64/libmialgo_sd.so
 vendor/lib64/libmialgo_video_seg_depth.so
 vendor/lib64/libmialgoengine.so
 vendor/lib64/libmibokeh_mt6873.so
+vendor/lib64/android.frameworks.displayservice@1.0.so
 vendor/lib64/libmicamera_adapter.so
 vendor/lib64/libmicamjson.so
 vendor/lib64/libmiphone_capture_bokeh_mono.so
@@ -1334,7 +1335,7 @@ vendor/lib64/libcodec2_vndk.so:vendor/lib64/libcodec2_vndk-v34.so;FIX_SONAME
 vendor/lib64/libcodec2_vpp_fa_plugin.so
 vendor/lib64/libcodec2_vpp_qt_plugin.so
 vendor/lib64/libcodec2_vpp_rs_plugin.so
-vendor/lib64/libformatter.so
+vendor/lib64/libformatter.so:vendor/lib64/libformatter-mtk.so;FIX_SONAME
 vendor/lib64/libsfplugin_ccodec_utils.so:vendor/lib64/libsfplugin_ccodec_utils-v34.so;FIX_SONAME
 
 # Mfido

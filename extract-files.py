@@ -194,9 +194,15 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/libsfplugin_ccodec_utils-v34.so'): blob_fixup()
         .replace_needed('libcodec2_vndk.so', 'libcodec2_vndk-v34.so'),
 
+    ('vendor/lib64/libcodec2_mtk_vdec.so',
+     'vendor/lib64/libcodec2_mtk_venc.so'): blob_fixup()
+        .replace_needed('libcodec2_soft_common.so', 'libcodec2_soft_common-v34.so')
+        .replace_needed('libcodec2_vndk.so', 'libcodec2_vndk-v34.so')
+        .replace_needed('libsfplugin_ccodec_utils.so', 'libsfplugin_ccodec_utils-v34.so')
+        .replace_needed('libui.so', 'libui-v34.so')
+        .replace_needed('libformatter.so', 'libformatter-mtk.so'),
+
     ('vendor/lib64/libcodec2_mtk_c2store.so',
-     'vendor/lib64/libcodec2_mtk_vdec.so',
-     'vendor/lib64/libcodec2_mtk_venc.so',
      'vendor/lib64/libcodec2_vpp_fa_plugin.so',
      'vendor/lib64/libcodec2_vpp_mi_plugin.so',
      'vendor/lib64/libcodec2_vpp_qt_plugin.so',
