@@ -101,3 +101,8 @@ Use the normal Android OTA tools for signed packages. If repacking payload opera
 - **[LineageOS](https://github.com/LineageOS)** and **[PixelOS](https://github.com/PixelOS-AOSP)** — ROM sources and prior Android 17 compatibility work.
 
 Original copyright, attribution and Git history are retained. See [LICENSE](LICENSE) and [NOTICE](NOTICE). This is an unofficial adaptation maintained in the mt6897-degas repositories.
+
+Charging and face enrollment integration fixes are documented in
+[HYPERCHARGE-FACE.md](patches/HYPERCHARGE-FACE.md). They are checked against the
+pinned stock inputs and matching Settings sources; new hardware results remain
+unverified.

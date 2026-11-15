@@ -97,15 +97,10 @@ on boot
 
 # Charger.
 #
-# This block arrived from duchamp, with the device name search-replaced. Xiaomi
-# disables accelerated charging for a handful of projects (xaga, xagain and
-# duchamp GL, in init.batterysecret.rc and init.project.rc respectively); degas
-# is not one of them - stock names it nowhere and leaves batterysecret on its
-# built-in default. We were the only ones turning it off, so put it back.
-#
-# The property is persistent, so a device that has already booted our earlier
-# builds keeps the false we stored in /data. Write the default back explicitly
-# once, otherwise the flash alone would not undo it.
+# Restore the persistent default, including devices that ran earlier builds.
+# The guarded batterysecret extraction fix also preserves the degas acceleration
+# feature byte; otherwise that daemon would immediately force this back to false.
+# Charger/battery authentication and kernel thermal/current limits stay stock.
 on boot && property:ro.product.device=degas
     setprop persist.vendor.accelerate.charge true
 

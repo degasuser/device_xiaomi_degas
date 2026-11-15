@@ -7,6 +7,7 @@ import zipfile
 from pathlib import Path
 
 from tools.codec2_compat import FIXES
+from tools.hypercharge_compat import FIXED_SHA256 as BATTERYSECRET_SHA256
 
 EXPECTED = 'cc2312e54d4a4ce18de6d12d32fbe2522cf88273e2aab36c7194b5d1cf48a6b7'
 
@@ -36,6 +37,11 @@ def main():
             print(f'FAIL: unpatched or unrecognized Codec2 {kind} blob: {digest}')
             return 1
     print('OK: pinned Codec2 allocation and DMA-BUF backend fixes')
+    digest = hashlib.sha256((vendor / 'vendor/bin/batterysecret').read_bytes()).hexdigest()
+    if digest != BATTERYSECRET_SHA256:
+        print(f'FAIL: unpatched or unrecognized degas batterysecret: {digest}')
+        return 1
+    print('OK: degas batterysecret acceleration fix')
     return 0
 
 if __name__ == '__main__':

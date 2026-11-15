@@ -14,6 +14,15 @@ allow hal_face_default face_vendor_data_file:file create_file_perms;
 # asked for at runtime.
 allow hal_face_default fwk_camera_service:service_manager find;
 binder_call(hal_face_default, cameraserver);
+# Native camera device/status callbacks run in mifaced's process. The client
+# call above permits reverse binder transfer, but does not permit reverse call.
+binder_call(cameraserver, hal_face_default)
+# CameraService reads its native client's /proc entry for camera attribution.
+allow cameraserver hal_face_default:dir search;
+allow cameraserver hal_face_default:file r_file_perms;
+# The vendor NDK preview and AImageReader use HIDL window tokens and gralloc.
+allow hal_face_default hidl_token_hwservice:hwservice_manager find;
+hal_client_domain(hal_face_default, hal_graphics_allocator)
 get_prop(hal_face_default, camera_config_prop)
 
 # TEE-backed template storage. The node mifaced actually opens is /dev/tee0,

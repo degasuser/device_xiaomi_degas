@@ -10,6 +10,7 @@ from pathlib import Path
 
 from tools.libsink_compat import fix_libsink_fields
 from tools.codec2_compat import fix_codec2_memory_backend, fix_codec2_store_size
+from tools.hypercharge_compat import fix_batterysecret_acceleration
 
 from extract_utils.fixups_blob import (
     blob_fixup,
@@ -74,6 +75,8 @@ lib_fixups: lib_fixups_user_type = {
 
 
 blob_fixups: blob_fixups_user_type = {
+    'vendor/bin/batterysecret': blob_fixup()
+        .call(fix_batterysecret_acceleration),
     'vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b': blob_fixup()
         .call(fix_codec2_store_size, need_tmp_dir=False),
 

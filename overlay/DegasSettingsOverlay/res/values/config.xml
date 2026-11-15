@@ -66,4 +66,10 @@
 
     <!-- The radius of the enrollment progress bar, in dp -->
     <integer name="config_udfpsEnrollProgressBar">90</integer>
+
+    <!-- mifaced opens the front camera and renders the enrollment preview.
+         Let Settings pass a ready Surface instead of opening a competing camera. -->
+    <bool name="config_face_enroll_hal_owns_camera">true</bool>
+    <integer name="face_preview_width">640</integer>
+    <integer name="face_preview_height">480</integer>
 </resources>
