@@ -205,9 +205,6 @@ vendor/lib64/libbt-vendor.so
 vendor/etc/vintf/manifest/bluetooth_audio.xml:vendor/etc/vintf/manifest/bluetooth_audio_V3.xml
 vendor/lib64/android.hardware.bluetooth.audio-impl-mediatek.so
 vendor/lib64/libbluetooth_audio_session_aidl_mtk.so
-vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
-vendor/lib64/vendor.mediatek.hardware.bluetooth.audio@2.1.so
-vendor/lib64/vendor.mediatek.hardware.bluetooth.audio@2.2.so
 
 # Camera
 odm/lib64/camera/plugins/com.xiaomi.plugin.arcsoftsr.so
@@ -1591,7 +1588,6 @@ vendor/lib64/vendor.mediatek.hardware.mtkradioex.sim-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.mtkradioex.smartratswitch-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.mtkradioex.voice-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.netdagent-V1-ndk.so
-vendor/lib64/vendor.mediatek.hardware.netdagent@1.0.so
 
 # Radio (IMS)
 system_ext/bin/vtservice
@@ -3129,9 +3125,7 @@ odm/lib64/libremosaiclib.so
 odm/lib64/libtensorflowlite_touch_c.so
 odm/lib64/libtouchreport.so
 odm/lib64/libtouchsensor.so
-system_ext/lib/vendor.mediatek.hardware.audio-V1-ndk.so
 system_ext/lib/vendor.xiaomi.hardware.displayfeature_aidl-V2-ndk.so
-system_ext/lib64/vendor.mediatek.hardware.audio-V1-ndk.so
 system_ext/lib64/vendor.xiaomi.hardware.displayfeature_aidl-V2-ndk.so
 vendor/bin/thermal_core
 vendor/bin/thermal_intf

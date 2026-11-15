@@ -262,6 +262,14 @@ PRODUCT_PACKAGES += \
     libpowerhalwrap_vendor \
     vendor.mediatek.hardware.mtkpower-V1-ndk.vendor
 
+# MediaTek interfaces built from hardware/mediatek on lineage-24.0
+PRODUCT_PACKAGES += \
+    vendor.mediatek.hardware.audio-V1-ndk \
+    vendor.mediatek.hardware.bluetooth.audio-V1-ndk.vendor \
+    vendor.mediatek.hardware.bluetooth.audio@2.1.vendor \
+    vendor.mediatek.hardware.bluetooth.audio@2.2.vendor \
+    vendor.mediatek.hardware.netdagent@1.0.vendor
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
