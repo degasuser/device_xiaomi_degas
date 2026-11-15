@@ -147,7 +147,8 @@ $(call soong_config_set,XIAOMI_BIOMETRICS_FINGERPRINT,IMPL_VER,V2)
 
 # GNSS
 PRODUCT_PACKAGES += \
-    android.hardware.location.gps.prebuilt.xml
+    android.hardware.location.gps.prebuilt.xml \
+    libmnl.vendor
 
 # Health
 PRODUCT_PACKAGES += \
@@ -258,7 +259,8 @@ PRODUCT_PACKAGES += \
     android.hardware.power-service.lineage-libperfmgr \
     libmtkperf_client_vendor \
     libperfctl_vendor \
-    libpowerhalwrap_vendor
+    libpowerhalwrap_vendor \
+    vendor.mediatek.hardware.mtkpower-V1-ndk.vendor
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
