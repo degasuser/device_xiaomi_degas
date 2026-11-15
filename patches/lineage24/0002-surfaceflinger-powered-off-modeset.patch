@@ -1,6 +1,8 @@
+diff --git a/services/surfaceflinger/SurfaceFlinger.cpp b/services/surfaceflinger/SurfaceFlinger.cpp
+index 9128394..876f58c 100644
 --- a/services/surfaceflinger/SurfaceFlinger.cpp
 +++ b/services/surfaceflinger/SurfaceFlinger.cpp
-@@ -1705,6 +1705,15 @@
+@@ -1705,6 +1705,15 @@ void SurfaceFlinger::initiateDisplayModeChanges() {
              }
              auto& desiredMode = desiredModeIt->second;
  

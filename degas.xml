@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-    <!-- PixelOS seventeen dependencies. Copy local device/kernel trees separately.
+    <!-- LineageOS 24.0 dependencies. Copy local device/kernel trees separately.
          Generate vendor from EEA stock: no unpublished repository is declared.
-         PixelOS already supplies Lineage compat/interfaces, Google pixel,
+         LineageOS already supplies compat/interfaces, Google pixel,
          extract-utils and qcom vibrator; do not duplicate them. -->
     <remote name="degas-lineage" fetch="https://github.com/LineageOS" />
     <project path="hardware/mediatek" name="android_hardware_mediatek"

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Check every PixelOS 17 patch before applying; accept already-applied patches."""
+"""Check every LineageOS 24 patch before applying; accept already-applied patches."""
 import argparse
 import os
 import subprocess
@@ -15,6 +15,7 @@ SERIES = (
     ('external/wpa_supplicant_8', '0003-wpa-mtk-gen4m-sae.patch'),
     ('frameworks/native', '0004-scheduler-suspended-display-vsync.patch'),
     ('frameworks/base', '0005-udfps-idle-aod-refresh-rate.patch'),
+    ('build/soong', '0006-check-boot-jars-xiaomi.patch'),
 )
 
 def validate_series(project, patches):
@@ -67,7 +68,7 @@ def main():
     projects = {}
     for directory, name in SERIES:
         project = args.root.resolve() / directory
-        patch = DEVICE / 'patches/pixelos17' / name
+        patch = DEVICE / 'patches/lineage24' / name
         projects.setdefault(project, []).append(patch)
     pending = []
     for project, patches in projects.items():

@@ -1,8 +1,8 @@
-# Xiaomi 14T (degas) — PixelOS 17
+# Xiaomi 14T (degas) — LineageOS 24.0
 
-Device tree for **Xiaomi 14T**, targeting [PixelOS seventeen / Android 17](https://github.com/PixelOS-AOSP/android_manifest/tree/seventeen). The PixelOS adaptation is maintained in the [`pixelos-17` branch](https://github.com/mt6897-degas/android_device_xiaomi_degas/tree/pixelos-17).
+Device tree for **Xiaomi 14T**, targeting [LineageOS 24.0 / Android 17](https://github.com/LineageOS/android/tree/lineage-24.0). Use the [`lineage-24.0` branch](https://github.com/mt6897-degas/android_device_xiaomi_degas/tree/lineage-24.0).
 
-The original **degas device tree was created by [Mikhail Mlhcnn (Advnirr)](https://github.com/Advnirr)** and published by [Degas Developers](https://github.com/degas-developers/android_device_xiaomi_degas). This adaptation is based on their `lineage-23.2` tree at [`e7de73fe295ff07eb08927c9c8c61b536a2cd378`](https://github.com/degas-developers/android_device_xiaomi_degas/commit/e7de73fe295ff07eb08927c9c8c61b536a2cd378).
+The original **degas device tree was created by [Mikhail Mlhcnn (Advnirr)](https://github.com/Advnirr)** and published by [Degas Developers](https://github.com/degas-developers/android_device_xiaomi_degas). This branch preserves their `lineage-23.2` history at [`e7de73fe295ff07eb08927c9c8c61b536a2cd378`](https://github.com/degas-developers/android_device_xiaomi_degas/commit/e7de73fe295ff07eb08927c9c8c61b536a2cd378) and the subsequent PixelOS 17 hardware compatibility work.
 
 | Item | Specification |
 | --- | --- |
@@ -10,60 +10,60 @@ The original **degas device tree was created by [Mikhail Mlhcnn (Advnirr)](https
 | SoC | MediaTek Dimensity 8300-Ultra / MT6897 |
 | GPU | Mali-G615 MC6 |
 | Display | 6.67-inch AMOLED, 1220 × 2712, up to 144 Hz |
-| ROM target | PixelOS 17, `custom_degas`, `userdebug` |
+| ROM target | LineageOS 24.0, `lineage_degas`, `userdebug` |
 | Stock base | HyperOS **OS3.0.306.0.WNEEUXM**, EEA, Android 16 |
 | Vendor API / VINTF level | 34 / 8 |
 | Super partition | 9,663,676,416 bytes |
 
 ## Status
 
-A full Android 17 build completed on November 13, 2026. Subsequent fixes address boot, Wi-Fi, IMS receiver registration, camera database links, audio compatibility and both identified MTK Codec2 crashes. Boot with SELinux enforcing, Wi-Fi and Power/AOD have been checked on the device. Hardware validation is still incomplete, including mobile-network/VoLTE coverage, DRM, all camera modes and battery consumption.
+This is a **source adaptation for LineageOS 24.0**. The product inherits `vendor/lineage/config/common_full_phone.mk` and does not force bundled GMS. The platform patches were rebased and checked against the upstream revisions recorded in [lineage24-source.lock.json](lineage24-source.lock.json). A complete LineageOS build and device boot have **not** been verified.
 
-Camera application selection is left to the ROM maintainer. This branch does not import MiCam or require a MiCam vendor tree; maintainers can integrate their chosen camera separately.
+The branch retains fixes for boot, Wi-Fi, IMS receiver registration, camera database links, audio compatibility, both identified MTK Codec2 crashes and Power/AOD. These fixes previously passed the documented build/device checks on PixelOS 17; those results do not establish LineageOS runtime compatibility. Mobile-network/VoLTE coverage, DRM, camera modes and battery consumption still need testing. See [Codec2 notes](patches/CODEC2-ANDROID17.md) and [Power/AOD notes](patches/POWER-AOD.md).
 
-The stock kernel, DTB, DTBO and 516 module files are pinned by hashes. Vendor extraction validates the selected EEA blobs and applies guarded compatibility fixes. See [Codec2 notes](patches/CODEC2-ANDROID17.md) and [Power/AOD notes](patches/POWER-AOD.md) for the implementation and validation limits.
+Camera application selection is left to the ROM maintainer. This tree does not import MiCam or require a MiCam vendor tree.
 
 ## Build on Linux
 
-Use a Linux x86_64 build host with the dependencies described in the [PixelOS build guide](https://blog.pixelos.net/docs/maintainers/guide/building-pixelos/).
+Use a Linux x86_64 host with the dependencies described in the [LineageOS build guides](https://wiki.lineageos.org/devices/). There is no official degas build guide or official support implied by this repository.
 
-### 1. Sync PixelOS and device dependencies
+### 1. Sync LineageOS and the device dependencies
 
 ```bash
-repo init -u https://github.com/PixelOS-AOSP/android_manifest.git -b seventeen --git-lfs
-repo sync
+repo init -u https://github.com/LineageOS/android.git -b lineage-24.0 --git-lfs
 
-git clone -b pixelos-17 https://github.com/mt6897-degas/android_device_xiaomi_degas.git device/xiaomi/degas
+git clone -b lineage-24.0 https://github.com/mt6897-degas/android_device_xiaomi_degas.git device/xiaomi/degas
+git clone -b lineage-24.0 https://github.com/mt6897-degas/android_device_xiaomi_degas-kernel.git device/xiaomi/degas-kernel
+
 mkdir -p .repo/local_manifests
 cp device/xiaomi/degas/degas.xml .repo/local_manifests/degas.xml
-repo sync
+repo sync -c -j$(nproc)
 ```
 
-The local manifest pins the required MediaTek, Xiaomi and vendor SELinux projects. PixelOS already supplies the other common dependencies.
+The local manifest pins the required MediaTek, Xiaomi and vendor SELinux projects to verified `lineage-24.0` revisions. The main LineageOS manifest already includes Lineage compat/interfaces, Google pixel, extract-utils and Qualcomm vibrator; do not declare duplicate projects for those paths. The source lock records the revisions checked during this adaptation; platform branches may move, so recheck patch applicability after syncing.
 
-### 2. Prepare the matching kernel and proprietary vendor files
+### 2. Extract the matching proprietary vendor files
 
-Matching prebuilts are available in the [PixelOS 17 kernel tree](https://github.com/mt6897-degas/android_device_xiaomi_degas-kernel/tree/pixelos-17). With an already prepared stock dump and a new kernel directory, use:
+Use an existing full stock dump of **OS3.0.306.0.WNEEUXM**:
 
 ```bash
-git clone -b pixelos-17 https://github.com/mt6897-degas/android_device_xiaomi_degas-kernel.git device/xiaomi/degas-kernel
 device/xiaomi/degas/tools/extract-vendor.sh /absolute/path/to/stock/dump
 ```
 
-To reproduce the kernel and stock dump directly from firmware, use the procedure below instead.
+This generates `vendor/xiaomi/degas`, validates the input hashes and applies the guarded compatibility fixes. A separate published vendor repository is not required for this extraction workflow. Regenerate vendor for this tree; an existing vendor modified for a separate MiCam port can contain unavailable dependencies.
 
-Obtain the Xiaomi fastboot package **OS3.0.306.0.WNEEUXM**. Install `fsck.erofs` and `lz4`, then prepare the stock dump and kernel in new output directories:
+If a stock dump is not available, obtain the matching Xiaomi fastboot package. With `fsck.erofs` and `lz4` installed, use new output directories:
 
 ```bash
 python3 device/xiaomi/degas/tools/prepare-stock.py \
     /absolute/path/to/degas_eea_global_images_OS3.0.306.0.WNEEUXM_16.0 \
     --work "$PWD/stock/degas" \
-    --kernel "$PWD/device/xiaomi/degas-kernel"
+    --kernel "$PWD/stock/degas-kernel-verification"
 
 device/xiaomi/degas/tools/extract-vendor.sh "$PWD/stock/degas/dump"
 ```
 
-This creates `device/xiaomi/degas-kernel` from matching factory files and generates `vendor/xiaomi/degas`. If these directories are already prepared, validate and reuse them instead of recreating them. Preserve the partition-specific kernel module layout, including the different factory zram variants. Do not substitute another device's super geometry or kernel.
+The separately extracted kernel is for comparison with the already cloned [matching kernel prebuilts](https://github.com/mt6897-degas/android_device_xiaomi_degas-kernel/tree/lineage-24.0). Keep the Image, DTB, DTBO and partition-specific modules together, including the different factory zram variants.
 
 ### 3. Apply the platform patches and build
 
@@ -72,31 +72,32 @@ python3 device/xiaomi/degas/tools/apply-patches.py --check
 python3 device/xiaomi/degas/tools/apply-patches.py
 source build/envsetup.sh
 breakfast degas userdebug
-m -j$(nproc) updatepackage pixelos
+m -j$(nproc) bacon
 ```
 
-The product is **`custom_degas`**. The active five-patch Android 17 series covers UDFPS refresh voting, suspended-display modesets and the MTK gen4m WPA3 compatibility path. The applier checks the complete series before modifying platform files and supports already-applied patches. Recheck after updating the ROM sources. Historical Lineage patches are retained for attribution under `patches/lineage23-reference`; see [the patch guide](patches/README.md).
+The product is **`lineage_degas`**. The six-patch series covers optical UDFPS refresh voting, suspended-display modesets, the MTK gen4m WPA3 path and Xiaomi IMS boot-jar packages. The applier checks the complete series before changing platform files and accepts already-applied patches. See [the patch guide](patches/README.md).
 
 ## Validation
 
-Run from the Android checkout root, with the matching kernel and generated vendor trees available:
+From the Android checkout root, with matching kernel and generated vendor:
 
 ```bash
-python3 device/xiaomi/degas/tools/validate-tree.py
 python3 device/xiaomi/degas/tools/validate-tree.py --stock "$PWD/stock/degas/dump" --vendor
 python3 device/xiaomi/degas/verify-hand-edits.py
 python3 device/xiaomi/degas/tools/apply-patches.py --check
+python3 device/xiaomi/degas/tools/power-tests/run.py
+python3 device/xiaomi/degas/tools/power-tests/test_apply_patches.py
 ```
 
-These checks validate XML/Python syntax, the product, kernel/blob hashes, generated vendor paths, guarded blob edits and patch applicability. Android/Soong, ELF, VINTF and combined SELinux checks must also pass during the build; device testing remains necessary.
+Host checks cover XML/Python syntax, product configuration, 519 kernel hashes, stock blob/firmware hashes, module-load paths, generated vendor paths and guarded blob edits. Android/Soong, ELF linkage, VINTF and combined SELinux checks must also pass during a full build; device testing remains necessary.
 
-Use the normal Android OTA tools to generate signed packages. If repacking payload operations separately, use an XZ mode supported by recovery's `xz-embedded`; the original OTA uses `CHECK_NONE`. Python `lzma` defaults to CRC64, which this recovery rejects with `kDownloadOperationExecutionError` / error 28. A desktop liblzma-only verification does not detect that incompatibility.
+Use the normal Android OTA tools for signed packages. If repacking payload operations separately, use XZ settings supported by recovery's `xz-embedded`; `CHECK_NONE` matches the previously working payload format. Python `lzma` defaults to CRC64, which the previous degas recovery rejected with `kDownloadOperationExecutionError` / error 28.
 
 ## Credits and license
 
 - **[Mikhail Mlhcnn (Advnirr)](https://github.com/Advnirr)** — original Xiaomi 14T / degas device tree.
 - **[Degas Developers](https://github.com/degas-developers)** — original LineageOS degas tree.
-- **[mt6897-devs](https://github.com/mt6897-devs/device_xiaomi_duchamp)** and the original contributors — the duchamp platform tree on which degas was based.
-- **[LineageOS](https://github.com/LineageOS)** and **[PixelOS](https://github.com/PixelOS-AOSP)** — ROM sources and common device support.
+- **[mt6897-devs](https://github.com/mt6897-devs/device_xiaomi_duchamp)** and the original contributors — duchamp platform foundation.
+- **[LineageOS](https://github.com/LineageOS)** and **[PixelOS](https://github.com/PixelOS-AOSP)** — ROM sources and prior Android 17 compatibility work.
 
-Original copyright and attribution notices are retained. The PixelOS branch preserves the upstream history together with the adaptation commits. See [LICENSE](LICENSE) and [NOTICE](NOTICE); kernel UAPI headers, stock configuration and proprietary components retain their respective licensing. This is an unofficial PixelOS adaptation.
+Original copyright, attribution and Git history are retained. See [LICENSE](LICENSE) and [NOTICE](NOTICE). This is an unofficial adaptation maintained in the mt6897-degas repositories.

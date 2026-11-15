@@ -1,10 +1,11 @@
+diff --git a/services/surfaceflinger/Scheduler/Scheduler.cpp b/services/surfaceflinger/Scheduler/Scheduler.cpp
+index d53c93d..02f2ea6 100644
 --- a/services/surfaceflinger/Scheduler/Scheduler.cpp
 +++ b/services/surfaceflinger/Scheduler/Scheduler.cpp
-@@ -837,6 +837,14 @@
-         return;
+@@ -838,6 +838,14 @@ void Scheduler::resyncToHardwareVsyncLocked(PhysicalDisplayId id, bool allowToEn
      }
      const Display& display = *displayOpt;
-+
+ 
 +    // OFF and suspended AOD emit no hardware VSYNC. Direct resync callers
 +    // must not re-enable sampling and wait for a period confirmation that
 +    // cannot arrive until the display resumes.
@@ -12,12 +13,15 @@
 +        display.powerMode == hal::PowerMode::DOZE_SUSPEND) {
 +        return;
 +    }
- 
++
      if (display.schedulePtr->isHardwareVsyncAllowed(allowToEnable)) {
          if (!modePtr) {
+             modePtr = display.selectorPtr->getActiveMode().modePtr.get();
+diff --git a/services/surfaceflinger/SurfaceFlinger.cpp b/services/surfaceflinger/SurfaceFlinger.cpp
+index 876f58c..0613328 100644
 --- a/services/surfaceflinger/SurfaceFlinger.cpp
 +++ b/services/surfaceflinger/SurfaceFlinger.cpp
-@@ -1705,10 +1705,10 @@
+@@ -1705,10 +1705,10 @@ void SurfaceFlinger::initiateDisplayModeChanges() {
              }
              auto& desiredMode = desiredModeIt->second;
  

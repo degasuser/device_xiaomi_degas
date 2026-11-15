@@ -23,3 +23,5 @@ Secure playback and DRM behavior have not been fully tested.
 Both files were first tested through tmpfs bind mounts without `nosuid`, with SELinux enforcing. Six consecutive cold starts of the C2 HAL, media and cameraserver successfully enumerated codecs. The C2 PID remained stable and neither `Fatal signal` nor `MemoryDevice type unknown` appeared. The fixes were subsequently included in the flashed images and checked after installation. These results establish initialization and codec enumeration; they do not establish complete encode/decode/DRM functionality.
 
 An earlier executable bind mount from `/data` failed because of `nosuid_transition`, so that attempt was not evidence that the patch worked. Runtime logs and diagnostic captures are kept in the local development workspace, outside this repository.
+
+The runtime evidence above comes from the prior PixelOS 17 port. This LineageOS 24.0 branch preserves the guarded edits; Codec2 layout, initialization and playback still require verification in a full LineageOS build.

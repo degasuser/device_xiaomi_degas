@@ -41,11 +41,12 @@ def main():
         ET.parse(p)
     for p in DEVICE.rglob('*.py'):
         ast.parse(p.read_text(), str(p))
-    product = (DEVICE / 'custom_degas.mk').read_text()
-    assert 'PRODUCT_NAME := custom_degas' in product
+    product = (DEVICE / 'lineage_degas.mk').read_text()
+    assert 'PRODUCT_NAME := lineage_degas' in product
     assert 'TARGET_PROVIDES_FACE_UNLOCK_HAL := true' in product
-    assert 'vendor/custom/config/common_full_phone.mk' in product
-    assert 'WITH_GMS := true' in product
+    assert 'vendor/lineage/config/common_full_phone.mk' in product
+    assert 'WITH_GMS := true' not in product, 'LineageOS must not force bundled GMS'
+    assert '$(LOCAL_DIR)/lineage_degas.mk' in (DEVICE / 'AndroidProducts.mk').read_text()
     assert 'BuildFingerprint=' not in product, 'Keep the Android 17 generated fingerprint'
     board = (DEVICE / 'BoardConfig.mk').read_text()
     assert 'BOARD_SUPER_PARTITION_SIZE := 9663676416' in board

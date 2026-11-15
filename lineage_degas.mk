@@ -3,8 +3,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# PixelOS includes GMS; set this before device.mk selects the VABC configuration.
-WITH_GMS := true
 # The stock Xiaomi face service supplies IFace/default.
 TARGET_PROVIDES_FACE_UNLOCK_HAL := true
 
@@ -15,14 +13,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from device makefile.
 $(call inherit-product, device/xiaomi/degas/device.mk)
 
-# Inherit PixelOS phone configuration (also inherits Lineage compatibility).
-$(call inherit-product, vendor/custom/config/common_full_phone.mk)
+# Inherit LineageOS phone configuration.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := degas
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_MODEL := 2406APNFAG
-PRODUCT_NAME := custom_degas
+PRODUCT_NAME := lineage_degas
 
 PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi

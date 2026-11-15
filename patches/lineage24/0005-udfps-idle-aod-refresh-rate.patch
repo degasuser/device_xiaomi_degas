@@ -1,6 +1,8 @@
+diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsController.java b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsController.java
+index b5e95f4..17d9b7e 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsController.java
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsController.java
-@@ -55,6 +55,7 @@
+@@ -55,6 +55,7 @@ import android.os.VibrationAttributes;
  import android.os.VibrationEffect;
  import android.provider.Settings;
  import android.util.Log;
@@ -8,7 +10,7 @@
  import android.view.HapticFeedbackConstants;
  import android.view.LayoutInflater;
  import android.view.MotionEvent;
-@@ -197,6 +198,9 @@
+@@ -197,6 +198,9 @@ public class UdfpsController implements DozeReceiver, Dumpable {
      private final boolean mIgnoreRefreshRate;
      private final boolean mHoldRefreshRateWhileShown;
      @Nullable private UdfpsDisplayModeProvider mHeldDisplayMode;
@@ -18,7 +20,7 @@
      private final KeyguardTransitionInteractor mKeyguardTransitionInteractor;
  
      // Currently the UdfpsController supports a single UDFPS sensor. If devices have multiple
-@@ -378,6 +382,7 @@
+@@ -378,6 +382,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                          return;
                      }
                      mAcquiredReceived = true;
@@ -26,7 +28,7 @@
                      final View view = mOverlay.getTouchOverlay();
                      unconfigureDisplay(view);
                      tryAodSendFingerUp();
-@@ -820,6 +825,45 @@
+@@ -820,6 +825,45 @@ public class UdfpsController implements DozeReceiver, Dumpable {
          if (mWakefulnessLifecycle != null) {
              mWakefulnessLifecycle.addObserver(mWakefulnessLifecycleObserver);
          }
@@ -72,7 +74,7 @@
      }
  
      /**
-@@ -876,9 +920,8 @@
+@@ -876,9 +920,8 @@ public class UdfpsController implements DozeReceiver, Dumpable {
              mOnFingerDown = false;
              mAttemptedToDismissKeyguard = false;
              mOrientationListener.enable();
@@ -84,7 +86,7 @@
              }
              if (mFingerprintManager != null) {
                  mFingerprintManager.onUdfpsUiEvent(FingerprintManager.UDFPS_UI_OVERLAY_SHOWN,
-@@ -899,9 +942,8 @@
+@@ -899,9 +942,8 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                  onFingerUp(mOverlay.getRequestId(), oldView);
              }
              final boolean removed = mOverlay.hide();
@@ -96,7 +98,7 @@
              }
              mKeyguardViewManager.hideAlternateBouncer(
                      /* updateScrim */ true,
-@@ -1123,23 +1165,38 @@
+@@ -1123,23 +1165,38 @@ public class UdfpsController implements DozeReceiver, Dumpable {
              mDeviceEntryFaceAuthInteractor.onUdfpsSensorTouched();
          }
          mOnFingerDown = true;
@@ -110,13 +112,6 @@
 -                dispatchOnUiReady(requestId);
 -            } else {
 -                udfpsView.configureDisplay(() -> dispatchOnUiReady(requestId));
--            }
--        }
--
--        if (isOptical()) {
--            for (Callback cb : mCallbacks) {
--                cb.onFingerDown();
--            }
 +        final Runnable sendPointerDown = () -> {
 +            mPointerDownDispatched = true;
 +            mFingerprintManager.onPointerDown(requestId, mSensorProps.sensorId, pointerId, x, y,
@@ -130,10 +125,15 @@
 +                } else {
 +                    udfpsView.configureDisplay(() -> dispatchOnUiReady(requestId));
 +                }
-+            }
+             }
+-        }
+-
+-        if (isOptical()) {
+-            for (Callback cb : mCallbacks) {
+-                cb.onFingerDown();
 +            if (isOptical()) {
 +                for (Callback cb : mCallbacks) cb.onFingerDown();
-+            }
+             }
 +        };
 +        if (mRefreshRateController != null && isOptical()) {
 +            // The vendor HAL illuminates onPointerDown, not onUiReady. Wait for
@@ -152,7 +152,7 @@
          }
      }
  
-@@ -1173,7 +1230,7 @@
+@@ -1173,7 +1230,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
          mExecution.assertIsMainThread();
          mActivePointerId = MotionEvent.INVALID_POINTER_ID;
          mAcquiredReceived = false;
@@ -161,7 +161,7 @@
              mFingerprintManager.onPointerUp(requestId, mSensorProps.sensorId, pointerId, x,
                      y, minor, major, orientation, time, gestureStart, isAod);
              if (isOptical()) {
-@@ -1182,7 +1239,9 @@
+@@ -1182,7 +1239,9 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                  }
              }
          }
@@ -171,6 +171,9 @@
          unconfigureDisplay(view);
          cancelAodSendFingerUpAction();
      }
+diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsRefreshRateController.java b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsRefreshRateController.java
+new file mode 100644
+index 0000000..5d26a6d
 --- /dev/null
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsRefreshRateController.java
 @@ -0,0 +1,135 @@

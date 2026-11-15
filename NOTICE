@@ -198,3 +198,10 @@ The original Xiaomi 14T / degas tree was created by Mikhail Mlhcnn
 https://github.com/degas-developers/android_device_xiaomi_degas.
 The PixelOS adaptation is published separately by mt6897-degas:
 https://github.com/mt6897-degas/android_device_xiaomi_degas/tree/pixelos-17.
+
+LineageOS 24.0 adaptation (2026-11-15): Lineage product configuration,
+removal of forced GMS, platform patch rebasing and the carried-forward
+Xiaomi IMS boot-jar allowlist. Existing stock hardware compatibility fixes
+and attribution are preserved. Source checks do not establish a successful
+LineageOS build or device boot. Public branch:
+https://github.com/mt6897-degas/android_device_xiaomi_degas/tree/lineage-24.0.
