@@ -1,10 +1,64 @@
 # Degas charging and face enrollment compatibility
 
-The stock input is OS3.0.306.0.WNEEUXM. These changes fix two confirmed
+The stock input is OS3.0.306.0.WNEEUXM. These changes fix confirmed
 integration problems. Charging power and completed enrollment still require
 hardware verification; no new device measurements are claimed.
 
-## Accelerated charging
+## Xiaomi PD authentication: missing Type-C SELinux label
+
+For degas, `batterysecret::usbpd_dr_swap()` opens
+`/sys/devices/platform/rt-pd-manager/typec/port0/data_role` with `O_RDWR`.
+It reads the Type-C data role and requests `host` before sending Xiaomi VDMs;
+the verification path subsequently restores `device`.
+The packaged policy had no label for that node: it inherited `sysfs`, and
+`vendor_batterysecret` was denied `open`, `read` and `write`. Parent directory
+search already worked. This prevents the stock daemon from even attempting
+the authenticated Xiaomi charger exchange on the normal sink-ready path.
+
+After four failed role-swap attempts, `verify_pd_digest()` records failure and
+writes zero to `pd_adapter/usbpd_verifed`. In the factory kernel,
+`adapter_class::usbpd_verifed_store()` passes failure type 4 to
+`mtk_pd_adapter::pd_get_cap()`, which sets USB property 2,
+`pd_authentication`, to zero. Success type 5 refreshes source capabilities and
+sets that property to one. The getter table and switch targets were checked
+against the ELF symbols and relocations, not inferred from property names.
+
+`mtk_charger_framework::do_algorithm()` tests that authentication flag when
+choosing the charging path. Its unauthenticated fallback includes a 1.7 A
+input-current ceiling for multiple source capabilities, a 1.5 A variant,
+and a separate up-to-3 A rule below 6 V. These are conditional fallback
+limits, not a universal 11 W cap. FFC additionally requires the adapter's
+verified flag. `pd_cp_manager::pdm_psy_change()` waits for `pd_verify_done`;
+that completion flag is set even after failed authentication. Generic PPS
+can still run when suitable APDOs exist. Do not claim that failed Xiaomi
+authentication disables every charge-pump/PPS path.
+
+The fix labels only `data_role` as `sysfs_usb_nonplat`, using the daemon's
+existing access to that type. No new allow rule is needed:
+
+```text
+genfscon sysfs /devices/platform/rt-pd-manager/typec/port0/data_role u:object_r:sysfs_usb_nonplat:s0
+```
+
+The combined PixelOS policy was rebuilt with neverallow assertions enabled.
+44 effective policy queries verify the exact path before and after the fix,
+the unchanged authentication nodes and parent search, denied writes to
+unrelated sysfs and by applications, and the retained face camera callback.
+The same source label is included in both public device branches; a full
+LineageOS build and its combined policy remain untested.
+This removes a proven software blocker for Xiaomi authentication. It does
+not establish the exact cause of a particular 11 W measurement or measured
+67 W operation without a charger test.
+
+Binary references in the factory inputs: `batterysecret` role open at `0x5df8`,
+verification failure at `0x6ea8`, result write at `0x73b4`;
+`adapter_class.ko` result dispatch at `0x57e0`/`0x5804`;
+`mtk_pd_adapter.ko` authentication writes at `0x52d8`/`0x53a0`;
+`mtk_charger_framework.ko` authentication branch at `0x1c850`, fallback
+ceiling at `0x1d808`, FFC verified condition at `0x23458`.
+Addresses refer to the corresponding analysis databases, not file offsets.
+
+## Accelerated charging property consistency
 
 Stock `batterysecret` initializes its acceleration feature to one, then clears
 it in the `degas` device branch. `verify_pd_digest()` consequently forces

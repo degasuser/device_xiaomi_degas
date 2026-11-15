@@ -16,6 +16,10 @@ genfscon sysfs /devices/platform/11f01000.i2c/i2c-5/5-0034/11f01000.i2c:mt6375@3
 genfscon sysfs /devices/platform/11f01000.i2c/i2c-5/5-0034/11f01000.i2c:mt6375@34:mtk-gauge/power_supply u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/pd-adapter/Charging_Adapter                                             u:object_r:sysfs_batteryinfo:s0
 
+# batterysecret must swap the Type-C data role before Xiaomi PD authentication.
+# The unlabelled node otherwise inherits sysfs and rejects its O_RDWR access.
+genfscon sysfs /devices/platform/rt-pd-manager/typec/port0/data_role                                     u:object_r:sysfs_usb_nonplat:s0
+
 # Display
 genfscon sysfs /devices/virtual/mi_display/disp_feature/disp-DSI-0                                       u:object_r:vendor_sysfs_displayfeature:s0
 

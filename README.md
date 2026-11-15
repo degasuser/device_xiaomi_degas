@@ -104,5 +104,6 @@ Original copyright, attribution and Git history are retained. See [LICENSE](LICE
 
 Charging and face enrollment integration fixes are documented in
 [HYPERCHARGE-FACE.md](patches/HYPERCHARGE-FACE.md). They are checked against the
-pinned stock inputs and matching Settings sources; new hardware results remain
-unverified.
+pinned stock inputs and matching Settings sources. The Type-C SELinux label
+fix removes a confirmed blocker in Xiaomi PD authentication; charging wattage
+and completed face enrollment remain unmeasured on hardware.
