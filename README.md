@@ -43,6 +43,15 @@ The local manifest pins the required MediaTek, Xiaomi and vendor SELinux project
 
 ### 2. Prepare the matching kernel and proprietary vendor files
 
+Matching prebuilts are available in the [PixelOS 17 kernel tree](https://github.com/mt6897-degas/android_device_xiaomi_degas-kernel/tree/pixelos-17). With an already prepared stock dump and a new kernel directory, use:
+
+```bash
+git clone -b pixelos-17 https://github.com/mt6897-degas/android_device_xiaomi_degas-kernel.git device/xiaomi/degas-kernel
+device/xiaomi/degas/tools/extract-vendor.sh /absolute/path/to/stock/dump
+```
+
+To reproduce the kernel and stock dump directly from firmware, use the procedure below instead.
+
 Obtain the Xiaomi fastboot package **OS3.0.306.0.WNEEUXM**. Install `fsck.erofs` and `lz4`, then prepare the stock dump and kernel in new output directories:
 
 ```bash
