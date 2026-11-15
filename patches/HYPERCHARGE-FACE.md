@@ -23,8 +23,17 @@ python3 device/xiaomi/degas/tools/test_hypercharge.py \
 ```
 
 The init property also repairs the persistent false value from older builds.
-This restores the accelerated charging path; it does not guarantee a particular
-wattage with any cable, charger, battery level or temperature.
+This fixes the mismatch between the device's declared charging default and the
+stock daemon. It is not a verified fix for the reported approximately 11 W limit:
+the property is only logged by `verify_pd_digest()`, and a charging driver
+consumer has not been established. Do not equate the property with charger power.
+
+The shipped charging driver selects FFC and current limits itself, using battery
+authentication, negotiated adapter capabilities, temperature and charge level.
+Its 2 A charge-current cap is conditional on failed battery authentication;
+saved logs show authentication succeeds. Those logs also show a 5 V / 1.5 A
+adapter and a nearly full battery, so they cannot establish the reported charger
+failure. No authentication result, current limit or thermal vote is forced.
 
 ## Face enrollment
 
