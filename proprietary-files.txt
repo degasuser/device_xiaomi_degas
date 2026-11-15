@@ -197,6 +197,7 @@ vendor/etc/smartpa_param/AW_DSP.bin
 
 # Bluetooth
 vendor/firmware/BT_FW.cfg
+vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so;MODULE_SUFFIX=-vendor
 vendor/lib64/libbluetooth_mtk.so
 vendor/lib64/libbluetooth_mtk_pure.so
 vendor/lib64/libbt-vendor.so
