@@ -1,3 +1,5 @@
+# Not packaged into the ROM zip (add_firmware_proprietary_file=False):
+# bootloader/firmware stays as flashed from stock 306 EU. Kept for reference.
 # Unpinned firmware from missi-user 16 BP2A.250605.031.A3 OS3.0.306.0.WNEEUXM release-keys
 
 apusys.img;AB
