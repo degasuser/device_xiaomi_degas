@@ -16,3 +16,7 @@ Patches 0001–0005 carry forward the PixelOS 17 fixes and were rebased against 
 IMS receiver patches in `ims-receivers/` are applied separately by `extract-files.py`. Guarded Codec2 edits are also performed during extraction. See [CODEC2-ANDROID17.md](CODEC2-ANDROID17.md) and [POWER-AOD.md](POWER-AOD.md).
 
 `lineage23-reference/` retains the original upstream patches and attribution. It is not an additional series to apply to LineageOS 24.0. The active boot-jar patch is the reviewed carry-forward from that archive. The old sensor patch is unnecessary for the device's one-shot UDFPS sub-HAL. The audio namespace conflict is handled by the renamed device source module. Launcher and flashlight preferences remain the ROM maintainer's choice.
+
+## Project Infinity X 17
+
+`infinity17/` holds the same six patches for Project Infinity X 17. Infinity forks `frameworks/base` and adds MediaTek GHBM dimming, Smart Pixels and UDFPS animations to `UdfpsController`, so 0001 and 0005 are rebased onto that file: the GHBM dimming step and `setIlluminationRequested` move into the deferred pointer-down runnable, and the UDFPS animation is hidden on any finger-up. Patches 0002, 0003, 0004 and 0006 are unchanged copies. `tools/apply-patches.py` selects `infinity17/` when `vendor/infinity` exists.

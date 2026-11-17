@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Check every LineageOS 24 patch before applying; accept already-applied patches."""
+"""Check every platform patch before applying; accept already-applied patches."""
 import argparse
 import os
 import subprocess
@@ -65,10 +65,14 @@ def main():
     parser.add_argument('--check', action='store_true', help='validate without applying')
     parser.add_argument('--root', type=Path, default=ROOT)
     args = parser.parse_args()
+    # Project Infinity X forks frameworks/base; its UDFPS controller needs the
+    # rebased copies of 0001/0005 kept in patches/infinity17.
+    series_dir = 'infinity17' if (args.root.resolve() / 'vendor/infinity').is_dir() else 'lineage24'
+    print(f'Using patch series: patches/{series_dir}')
     projects = {}
     for directory, name in SERIES:
         project = args.root.resolve() / directory
-        patch = DEVICE / 'patches/lineage24' / name
+        patch = DEVICE / 'patches' / series_dir / name
         projects.setdefault(project, []).append(patch)
     pending = []
     for project, patches in projects.items():
