@@ -1,4 +1,5 @@
 # Firmware from stock EEA OS3.0.306.0.WNEEUXM; SHA1 pinned to supplied images.
+# Not packaged into the OTA: flash stock OS3.0.306.0.WNEEUXM (fastboot) first.
 
 apusys.img;AB|0321a08e0a09c8bc29fb0a63d4b63ad8f3690ad1
 audio_dsp.img;AB|dac37f3089834a91898335ccec535e33387420fa

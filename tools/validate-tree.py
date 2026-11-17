@@ -89,13 +89,9 @@ def main():
             p = stock_file(args.stock, f['source'])
             assert p.is_file(), f'Missing stock blob: {f["source"]}'
             assert digest(p) == f['sha256'], f'Stock blob mismatch: {f["source"]}'
-        for raw in (DEVICE / 'proprietary-firmware.txt').read_text().splitlines():
-            if not raw or raw.startswith('#'):
-                continue
-            name = raw.split(';')[0]
-            expected = raw.split('|')[1]
-            assert hashlib.sha1((args.stock / name).read_bytes()).hexdigest() == expected, name
-        print(f'OK: {len(locked_blobs["files"])} raw blobs and all firmware match EEA 3.0.306')
+        # Firmware images are not packaged (stock 306 is flashed first), so
+        # they are not required to match the fastboot-package hashes here.
+        print(f'OK: {len(locked_blobs["files"])} raw blobs match EEA 3.0.306')
     if args.vendor:
         vendor = ROOT / 'vendor/xiaomi/degas'
         for name in ('Android.bp', 'degas-vendor.mk', 'BoardConfigVendor.mk'):

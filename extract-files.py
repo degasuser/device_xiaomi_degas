@@ -274,7 +274,8 @@ module = ExtractUtilsModule(
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
-    add_firmware_proprietary_file=True,
+    # Low-level firmware (lk, tee, gz, ...) is not packaged; flash stock first.
+    add_firmware_proprietary_file=False,
 )
 
 if __name__ == '__main__':
