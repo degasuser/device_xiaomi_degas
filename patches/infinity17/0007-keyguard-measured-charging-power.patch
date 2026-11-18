@@ -1,0 +1,58 @@
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java b/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java
+index b90d1dd..6bd7ef1 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java
+@@ -761,6 +761,42 @@ public class KeyguardIndicationController {
+         });
+     }
+ 
++    /**
++     * The battery info line shows the charger's advertised maximum by default. Some chargers
++     * negotiate a higher-power mode after the first report, so that figure can be far from the
++     * real charging power. While charging, show the measured battery current and voltage
++     * instead. The charging-speed label still uses the advertised maximum.
++     */
++    private void updateChargingDetails(BatteryStatus status) {
++        mChargingCurrent = status.maxChargingCurrent;
++        mChargingVoltage = status.maxChargingVoltage;
++        mChargingWattage = status.maxChargingWattage;
++        if (status.status != BatteryManager.BATTERY_STATUS_CHARGING) {
++            return;
++        }
++        try {
++            final BatteryManager batteryManager = mContext.getSystemService(BatteryManager.class);
++            final Intent battery = mContext.registerReceiver(null,
++                    new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
++            if (batteryManager == null || battery == null) {
++                return;
++            }
++            final long currentMicroAmps =
++                    batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
++            final int voltageMilliVolts = battery.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
++            if (currentMicroAmps == Long.MIN_VALUE || currentMicroAmps == 0
++                    || voltageMilliVolts <= 0) {
++                return;
++            }
++            final float microAmps = Math.abs((float) currentMicroAmps);
++            mChargingCurrent = microAmps;
++            mChargingVoltage = voltageMilliVolts * 1000f;
++            mChargingWattage = (microAmps / 1000f) * voltageMilliVolts;
++        } catch (RuntimeException e) {
++            Log.w(TAG, "Measured charging details unavailable", e);
++        }
++    }
++
+     private void updateLockScreenBatteryMsg(boolean animate) {
+         if (mBatteryPresent && (mPowerPluggedIn || mEnableBatteryDefender)) {
+             String powerIndication = computePowerIndication();
+@@ -1687,9 +1723,7 @@ public class KeyguardIndicationController {
+             mPowerPluggedInDock = status.isPluggedInDock() && isChargingOrFull;
+             mPowerPluggedIn = isPowerPluggedIn(status, isChargingOrFull);
+             mPowerCharged = status.isCharged();
+-            mChargingCurrent = status.maxChargingCurrent;
+-            mChargingVoltage = status.maxChargingVoltage;
+-            mChargingWattage = status.maxChargingWattage;
++            updateChargingDetails(status);
+             mChargingSpeed = status.getChargingSpeed(mContext);
+             mChargingStatus = status.chargingStatus;
+             mBatteryLevel = status.level;

@@ -1,0 +1,47 @@
+diff --git a/aidl/health/Health.cpp b/aidl/health/Health.cpp
+index 1d8ebb5..63e12a3 100644
+--- a/aidl/health/Health.cpp
++++ b/aidl/health/Health.cpp
+@@ -20,6 +20,7 @@
+ 
+ using aidl::android::hardware::health::HalHealthLoop;
+ using aidl::android::hardware::health::Health;
++using aidl::android::hardware::health::HealthInfo;
+ 
+ #if !CHARGER_FORCE_NO_UI
+ using aidl::android::hardware::health::charger::ChargerCallback;
+@@ -27,6 +28,24 @@ using aidl::android::hardware::health::charger::ChargerModeMain;
+ #endif
+ 
+ static constexpr const char* gInstanceName = "default";
++
++namespace aidl::android::hardware::health {
++// MediaTek fuel gauges export time_to_full_now in an undocumented unit; the
++// framework shows that value verbatim (for example "18 days until full").
++// Report it as unsupported so BatteryStats estimates the time from observed
++// charge steps instead.
++class MediatekHealth : public Health {
++  public:
++    using Health::Health;
++
++  protected:
++    void UpdateHealthInfo(HealthInfo* health_info) override {
++        health_info->batteryChargeTimeToFullNowSeconds =
++                HealthInfo::BATTERY_CHARGE_TIME_TO_FULL_NOW_SECONDS_UNSUPPORTED;
++    }
++};
++}  // namespace aidl::android::hardware::health
++
+ static constexpr std::string_view gChargerArg{"--charger"};
+ 
+ #if !CHARGER_FORCE_NO_UI
+@@ -47,7 +66,8 @@ int main(int argc, char** argv) {
+     // make a default health service
+     auto config = std::make_unique<healthd_config>();
+     ::android::hardware::health::InitHealthdConfig(config.get());
+-    auto binder = ndk::SharedRefBase::make<Health>(gInstanceName, std::move(config));
++    auto binder = ndk::SharedRefBase::make<aidl::android::hardware::health::MediatekHealth>(
++            gInstanceName, std::move(config));
+ 
+     if (argc >= 2 && argv[1] == gChargerArg) {
+ #if !CHARGER_FORCE_NO_UI

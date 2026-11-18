@@ -749,7 +749,9 @@
          the framework from using higher refresh rates, even if display modes with higher refresh
          rates are available from hardware composer. Only has an effect if the value is
          non-zero. -->
-    <integer name="config_defaultPeakRefreshRate">144</integer>
+    <!-- Default to 120 Hz like stock HyperOS; 144 Hz stays selectable in Display settings.
+         SurfaceFlinger still drops to a lower mode when idle. -->
+    <integer name="config_defaultPeakRefreshRate">120</integer>
 
     <!-- Optical LHBM requires 120 Hz. Patch 0005 holds the vote while interactive,
          but releases it in idle AOD. A scan waits for the actual 120 Hz display mode

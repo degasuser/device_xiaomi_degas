@@ -17,6 +17,11 @@ SERIES = (
     ('frameworks/base', '0005-udfps-idle-aod-refresh-rate.patch'),
     ('build/soong', '0006-check-boot-jars-xiaomi.patch'),
 )
+# Applied after SERIES, only for Project Infinity X.
+INFINITY_EXTRA = (
+    ('frameworks/base', '0007-keyguard-measured-charging-power.patch'),
+    ('hardware/mediatek', '0008-health-ignore-gauge-time-to-full.patch'),
+)
 
 def validate_series(project, patches):
     """Validate stacked patches in a scratch index, preserving the real index/tree."""
@@ -70,7 +75,8 @@ def main():
     series_dir = 'infinity17' if (args.root.resolve() / 'vendor/infinity').is_dir() else 'lineage24'
     print(f'Using patch series: patches/{series_dir}')
     projects = {}
-    for directory, name in SERIES:
+    series = SERIES + (INFINITY_EXTRA if series_dir == 'infinity17' else ())
+    for directory, name in series:
         project = args.root.resolve() / directory
         patch = DEVICE / 'patches' / series_dir / name
         projects.setdefault(project, []).append(patch)
