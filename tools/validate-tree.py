@@ -41,11 +41,12 @@ def main():
         ET.parse(p)
     for p in DEVICE.rglob('*.py'):
         ast.parse(p.read_text(), str(p))
-    product = (DEVICE / 'infinity_degas.mk').read_text()
-    assert 'PRODUCT_NAME := infinity_degas' in product
+    product = (DEVICE / 'lineage_degas.mk').read_text()
+    assert 'PRODUCT_NAME := lineage_degas' in product
     assert 'TARGET_PROVIDES_FACE_UNLOCK_HAL := true' in product
-    assert 'vendor/infinity/config/common_full_phone.mk' in product
-    assert '$(LOCAL_DIR)/infinity_degas.mk' in (DEVICE / 'AndroidProducts.mk').read_text()
+    assert 'vendor/lineage/config/common_full_phone.mk' in product
+    assert 'vendor/pixel/gms/products/gms.mk' in product, 'crDroid build bundles GApps'
+    assert '$(LOCAL_DIR)/lineage_degas.mk' in (DEVICE / 'AndroidProducts.mk').read_text()
     assert 'BuildFingerprint=' not in product, 'Keep the Android 17 generated fingerprint'
     board = (DEVICE / 'BoardConfig.mk').read_text()
     assert 'BOARD_SUPER_PARTITION_SIZE := 9663676416' in board

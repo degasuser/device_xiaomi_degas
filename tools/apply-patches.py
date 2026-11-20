@@ -17,8 +17,8 @@ SERIES = (
     ('frameworks/base', '0005-udfps-idle-aod-refresh-rate.patch'),
     ('build/soong', '0006-check-boot-jars-xiaomi.patch'),
 )
-# Applied after SERIES, only for Project Infinity X.
-INFINITY_EXTRA = (
+# Applied after SERIES for crDroid-based trees (crDroid, Project Infinity X).
+CRDROID_EXTRA = (
     ('frameworks/base', '0007-keyguard-measured-charging-power.patch'),
     ('hardware/mediatek', '0008-health-ignore-gauge-time-to-full.patch'),
 )
@@ -70,12 +70,15 @@ def main():
     parser.add_argument('--check', action='store_true', help='validate without applying')
     parser.add_argument('--root', type=Path, default=ROOT)
     args = parser.parse_args()
-    # Project Infinity X forks frameworks/base; its UDFPS controller needs the
-    # rebased copies of 0001/0005 kept in patches/infinity17.
-    series_dir = 'infinity17' if (args.root.resolve() / 'vendor/infinity').is_dir() else 'lineage24'
+    # crDroid and Project Infinity X (whose SystemUI derives from crDroid's)
+    # need the rebased copies of 0001/0005 and the lock-screen charging patch
+    # kept in patches/infinity17; plain LineageOS uses patches/lineage24.
+    root = args.root.resolve()
+    crdroid_based = (root / 'vendor/infinity').is_dir() or (root / 'packages/apps/crDroidSettings').is_dir()
+    series_dir = 'infinity17' if crdroid_based else 'lineage24'
     print(f'Using patch series: patches/{series_dir}')
     projects = {}
-    series = SERIES + (INFINITY_EXTRA if series_dir == 'infinity17' else ())
+    series = SERIES + (CRDROID_EXTRA if crdroid_based else ())
     for directory, name in series:
         project = args.root.resolve() / directory
         patch = DEVICE / 'patches' / series_dir / name

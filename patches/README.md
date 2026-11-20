@@ -19,9 +19,9 @@ IMS receiver patches in `ims-receivers/` are applied separately by `extract-file
 
 ## Project Infinity X 17
 
-`infinity17/` holds the same six patches for Project Infinity X 17. Infinity forks `frameworks/base` and adds MediaTek GHBM dimming, Smart Pixels and UDFPS animations to `UdfpsController`, so 0001 and 0005 are rebased onto that file: the GHBM dimming step and `setIlluminationRequested` move into the deferred pointer-down runnable, and the UDFPS animation is hidden on any finger-up. Patches 0002, 0003, 0004 and 0006 are unchanged copies. `tools/apply-patches.py` selects `infinity17/` when `vendor/infinity` exists.
+`infinity17/` holds the same six patches for Project Infinity X 17. Infinity forks `frameworks/base` and adds MediaTek GHBM dimming, Smart Pixels and UDFPS animations to `UdfpsController`, so 0001 and 0005 are rebased onto that file: the GHBM dimming step and `setIlluminationRequested` move into the deferred pointer-down runnable, and the UDFPS animation is hidden on any finger-up. Patches 0002, 0003, 0004 and 0006 are unchanged copies. `tools/apply-patches.py` selects `infinity17/` when `vendor/infinity` exists, and also for crDroid (`packages/apps/crDroidSettings`): Infinity's SystemUI derives from crDroid's, and all eight patches were checked to apply to crDroid 17.0.
 
-Infinity-only additions, applied after the six shared patches:
+Additions for crDroid-based trees (crDroid and Infinity), applied after the six shared patches:
 
 - `0007-keyguard-measured-charging-power.patch` (frameworks/base): the lock-screen battery line showed the charger's first advertised maximum (for example 2.2 A / 4.2 V / 9.4 W during 67 W charging). While charging it now shows the measured battery current, voltage and power; the fast/slow charging label still uses the advertised maximum.
 - `0008-health-ignore-gauge-time-to-full.patch` (hardware/mediatek): the MediaTek gauge's `time_to_full_now` was shown verbatim as "12-18 days until full". The health HAL now reports it as unsupported, so BatteryStats estimates the time from observed charge steps.

@@ -1,8 +1,11 @@
 # Xiaomi 14T (degas) — LineageOS 24.0
 
-> **Project Infinity X 17 adaptation.** This branch builds `infinity_degas`
-> (`lunch infinity_degas-userdebug && m bacon`) on top of the `lineage-24.0`
-> branch of [mt6897-degas/android_device_xiaomi_degas](https://github.com/mt6897-degas/android_device_xiaomi_degas).
+> **crDroid 13 (Android 17) adaptation.** This branch builds `lineage_degas`
+> for crDroid 17.0 with bundled GApps from `vendor/pixel/gms`
+> (`lunch lineage_degas-userdebug && m bacon`, local manifest: `crdroid-17`
+> branch of degasuser/local_manifests). It shares the degas fixes of the
+> `infinity-17` branch and sits on top of the `lineage-24.0` branch of
+> [mt6897-degas/android_device_xiaomi_degas](https://github.com/mt6897-degas/android_device_xiaomi_degas).
 > All device work, history and attribution below belong to the original
 > authors: Mikhail Mlhcnn (Advnirr), Degas Developers, the PixelOS 17 port
 > author (notnotshuts) and the mt6897-devs duchamp contributors.
