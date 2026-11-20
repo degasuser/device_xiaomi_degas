@@ -33,9 +33,6 @@ PRODUCT_NAME := lineage_degas
 PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
-PRODUCT_SYSTEM_PROPERTIES += \
-    ro.product.marketname=Xiaomi 14T
-
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="missi-user 16 BP2A.250605.031.A3 OS3.0.306.0.WNEEUXM release-keys" \
     DeviceProduct=degas_eea
