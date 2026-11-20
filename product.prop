@@ -25,3 +25,8 @@ bluetooth.profile.vcp.controller.enabled=true
 
 # RKPD
 remote_provisioning.hostname=remoteprovisioning.googleapis.com
+
+# Project Infinity X device info for About phone. The values contain spaces,
+# which PRODUCT_SYSTEM_PROPERTIES would split, so they live in this prop file.
+ro.infinity.soc=MediaTek Dimensity 8300-Ultra
+ro.infinity.camera=50MP + 50MP + 12MP
